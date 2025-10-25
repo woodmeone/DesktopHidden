@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DesktopHidden - 桌面美化程序</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        /* 模拟桌面背景，您可以从 Unsplash 或 Pexels 获取图片 */
+        background-image: url("https://images.unsplash.com/photo-1699990176527-4638c4d21b7c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden; /* 防止滚动条 */
+      }
+      .desktop-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+      .control-panel {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+      .app-window {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: none; /* 默认隐藏 */
+        z-index: 999;
+        min-width: 400px;
+        min-height: 300px;
+      }
+      .app-window-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="desktop-container" id="desktopContainer">
+      <!-- 这里将动态加载子区和伪装块 -->
+    </div>
+
+    <!-- 浮动控制面板 -->
+    <div
+      class="control-panel p-4 bg-gray-800 text-white rounded-full shadow-lg hover:bg-gray-700 transition-colors duration-200"
+      id="controlPanel"
+    >
+      <i class="fas fa-bars text-xl"></i>
+    </div>
+
+    <!-- 控制面板弹窗 -->
+    <div
+      id="controlPanelMenu"
+      class="absolute bottom-20 right-20 bg-gray-900 text-white p-4 rounded-lg shadow-xl hidden z-1010"
+    >
+      <button
+        class="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded-md"
+        onclick="openDrawingSubzone()"
+      >
+        <i class="fas fa-plus mr-2"></i>新增子区
+      </button>
+      <button
+        class="block w-full text-left py-2 px-4 hover:bg-gray-700 rounded-md mt-1"
+        onclick="openSettings()"
+      >
+        <i class="fas fa-cog mr-2"></i>全局设置
+      </button>
+    </div>
+
+    <!-- 应用程序窗口容器 -->
+    <div id="appWindowContainer" class="app-window">
+      <iframe id="appWindowIframe" class="app-window-iframe"></iframe>
+    </div>
+
+    <script>
+      const desktopContainer = document.getElementById("desktopContainer");
+      const controlPanel = document.getElementById("controlPanel");
+      const controlPanelMenu = document.getElementById("controlPanelMenu");
+      const appWindowContainer = document.getElementById("appWindowContainer");
+      const appWindowIframe = document.getElementById("appWindowIframe");
+
+      controlPanel.addEventListener("click", () => {
+        controlPanelMenu.classList.toggle("hidden");
+      });
+
+      function openAppWindow(url, width = "80%", height = "80%") {
+        appWindowIframe.src = url;
+        appWindowContainer.style.width = width;
+        appWindowContainer.style.height = height;
+        appWindowContainer.style.display = "block";
+        controlPanelMenu.classList.add("hidden"); // 隐藏控制面板
+      }
+
+      function closeAppWindow() {
+        appWindowContainer.style.display = "none";
+        appWindowIframe.src = ""; // 清空iframe内容
+      }
+
+      function openDrawingSubzone() {
+        openAppWindow("drawing_subzone.html", "70%", "70%"); // 调整大小以适应绘制界面
+      }
+
+      function openSettings() {
+        openAppWindow("settings.html", "50%", "60%");
+      }
+
+      function openDrawingDisguiseBlock(subzoneId) {
+        // 将 subzoneId 传递给绘制页面，以便伪装块能关联到正确的子区
+        openAppWindow(
+          `drawing_disguise_block.html?subzoneId=${subzoneId}`,
+          "95%",
+          "95%"
+        );
+      }
+
+      // 模拟子区数据和渲染
+      let subzones = [];
+      let disguiseBlocks = []; // 存储伪装块
+
+      function addSubzoneToDesktop(subzoneId, x, y, width, height) {
+        const subzoneElement = document.createElement("div");
+        subzoneElement.className =
+          "subzone-wrapper absolute shadow-xl overflow-hidden"; // 样式由 iframe 内部控制
+        subzoneElement.style.left = `${x}px`;
+        subzoneElement.style.top = `${y}px`;
+        subzoneElement.style.width = `${width}px`;
+        subzoneElement.style.height = `${height}px`;
+        subzoneElement.id = `subzone-${subzoneId}`;
+        subzoneElement.style.zIndex = "10"; // 确保子区在桌面背景之上
+        subzoneElement.dataset.subzoneId = subzoneId; // 添加data属性方便查找
+
+        const subzoneIframe = document.createElement("iframe");
+        subzoneIframe.src = "subzone_view.html";
+        subzoneIframe.className = "w-full h-full border-none rounded-lg";
+        // subzoneIframe.style.resize = 'both'; // 允许 iframe 自身调整大小 - 这个应该在 iframe 内部控制
+
+        subzoneElement.appendChild(subzoneIframe);
+        desktopContainer.appendChild(subzoneElement);
+
+        // 拖拽逻辑
+        let isDragging = false;
+        let initialX, initialY, offsetX, offsetY;
+
+        const handleDragStart = (e) => {
+          // if (e.target.closest('.subzone-nav')) { // 只通过导航栏拖拽
+          //     isDragging = true;
+          //     offsetX = e.clientX - subzoneElement.getBoundingClientRect().left;
+          //     offsetY = e.clientY - subzoneElement.getBoundingClientRect().top;
+          //     subzoneElement.style.cursor = 'grabbing';
+          //     e.preventDefault(); // 防止默认的文本选择等行为
+          // }
+          // 阻止在iframe内部拖动时，外部div也被拖动
+          if (e.target.tagName === "IFRAME") {
+            return;
+          }
+
+          isDragging = true;
+          offsetX = e.clientX - subzoneElement.getBoundingClientRect().left;
+          offsetY = e.clientY - subzoneElement.getBoundingClientRect().top;
+          subzoneElement.style.cursor = "grabbing";
+          e.preventDefault(); // 防止默认的文本选择等行为
+        };
+
+        const handleDrag = (e) => {
+          if (!isDragging) return;
+          subzoneElement.style.left = `${e.clientX - offsetX}px`;
+          subzoneElement.style.top = `${e.clientY - offsetY}px`;
+        };
+
+        const handleDragEnd = () => {
+          isDragging = false;
+          subzoneElement.style.cursor = "default";
+        };
+
+        // 全局监听 mousemove 和 mouseup
+        document.addEventListener("mousemove", handleDrag);
+        document.addEventListener("mouseup", handleDragEnd);
+        subzoneElement.addEventListener("mousedown", handleDragStart);
+
+        // 模拟子区数据存储
+        subzones.push({
+          id: subzoneId,
+          x,
+          y,
+          width,
+          height,
+          element: subzoneElement,
+        });
+        console.log(`子区 ${subzoneId} 已添加到桌面。`);
+        return subzoneElement; // 返回元素，以便伪装块可以引用
+      }
+
+      // 创建伪装块
+      function createDisguiseBlock(subzoneId, points) {
+        const disguiseBlockId = Date.now();
+        const disguiseElement = document.createElement("div");
+        disguiseElement.className =
+          "disguise-block absolute bg-transparent z-20 transition-all duration-200";
+        disguiseElement.id = `disguise-block-${disguiseBlockId}`;
+        disguiseElement.dataset.subzoneId = subzoneId; // 关联子区
+        disguiseElement.style.pointerEvents = "auto"; // 允许鼠标事件
+
+        // 计算外包矩形，用于定位伪装块
+        let minX = Infinity,
+          minY = Infinity,
+          maxX = -Infinity,
+          maxY = -Infinity;
+        points.forEach((p) => {
+          minX = Math.min(minX, p.x);
+          minY = Math.min(minY, p.y);
+          maxX = Math.max(maxX, p.x);
+          maxY = Math.max(maxY, p.y);
+        });
+
+        console.log("Disguise Block Bounding Box:", { minX, minY, maxX, maxY });
+
+        disguiseElement.style.left = `${minX}px`;
+        disguiseElement.style.top = `${minY}px`;
+        disguiseElement.style.width = `${maxX - minX}px`;
+        disguiseElement.style.height = `${maxY - minY}px`;
+
+        // 相对于伪装块元素计算clip-path的百分比坐标
+        const relativeClipPathPoints = points
+          .map((p) => {
+            const relativeX = ((p.x - minX) / (maxX - minX)) * 100;
+            const relativeY = ((p.y - minY) / (maxY - minY)) * 100;
+            return `${relativeX}% ${relativeY}%`;
+          })
+          .join(", ");
+
+        console.log(
+          "Disguise Block Relative Clip Path Points:",
+          relativeClipPathPoints
+        );
+
+        disguiseElement.style.clipPath = `polygon(${relativeClipPathPoints})`;
+        disguiseElement.style.webkitClipPath = `polygon(${relativeClipPathPoints})`; // 兼容 Webkit
+
+        desktopContainer.appendChild(disguiseElement);
+
+        // 悬停效果
+        let hoverInterval;
+        disguiseElement.addEventListener("mouseover", () => {
+          disguiseElement.style.backgroundColor = "rgba(255, 255, 255, 0.2)"; // 白色透明遮罩
+          let opacity = 0.2;
+          let increasing = true;
+          hoverInterval = setInterval(() => {
+            if (increasing) {
+              opacity += 0.05;
+              if (opacity >= 0.4) increasing = false;
+            } else {
+              opacity -= 0.05;
+              if (opacity <= 0.2) increasing = true;
+            }
+            disguiseElement.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
+          }, 100); // 闪动速度
+        });
+
+        disguiseElement.addEventListener("mouseout", () => {
+          clearInterval(hoverInterval);
+          disguiseElement.style.backgroundColor = "transparent";
+        });
+
+        // 点击切换关联子区的显示/隐藏
+        disguiseElement.addEventListener("click", () => {
+          const associatedSubzone = subzones.find((s) => s.id == subzoneId);
+          if (associatedSubzone) {
+            const subzoneDomElement = associatedSubzone.element;
+            if (subzoneDomElement.style.display === "none") {
+              subzoneDomElement.style.display = "block";
+              console.log(`子区 ${subzoneId} 显示`);
+            } else {
+              subzoneDomElement.style.display = "none";
+              console.log(`子区 ${subzoneId} 隐藏`);
+            }
+          }
+        });
+
+        disguiseBlocks.push({
+          id: disguiseBlockId,
+          subzoneId,
+          points,
+          element: disguiseElement,
+        });
+        console.log(
+          `伪装块 ${disguiseBlockId} 已添加到桌面，关联子区 ${subzoneId}。`
+        );
+      }
+
+      // 示例：页面加载时添加一个子区
+      document.addEventListener("DOMContentLoaded", () => {
+        const subzone1 = addSubzoneToDesktop(1, 100, 100, 300, 200);
+        const subzone2 = addSubzoneToDesktop(2, 450, 150, 350, 250);
+
+        // 模拟创建一个伪装块并关联到 subzone1
+        // createDisguiseBlock(1, [{x: 200, y: 50}, {x: 300, y: 150}, {x: 150, y: 250}]);
+      });
+    </script>
+  </body>
+</html>

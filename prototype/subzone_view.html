@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>子区视图</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: transparent; /* 背景透明，与桌面融合 */
+      }
+      .subzone {
+        /* 模拟子区样式，半透明黑色 */
+        background-color: rgba(0, 0, 0, 0.45);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        resize: both; /* 允许双向调整大小 */
+        overflow: hidden;
+        min-width: 150px;
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+      }
+      .subzone-nav {
+        background-color: rgba(
+          31,
+          41,
+          55,
+          0.7
+        ); /* Tailwind gray-800 with opacity */
+        padding: 8px 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        cursor: grab;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      .subzone-content {
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-center: center;
+        align-items: flex-start;
+        overflow-y: auto;
+        color: white;
+      }
+      .shortcut-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80px; /* 固定宽度 */
+        text-align: center;
+        padding: 5px;
+        border-radius: 6px;
+        transition: background-color 0.2s ease-in-out;
+        cursor: pointer;
+      }
+      .shortcut-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      .shortcut-item img {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        margin-bottom: 5px;
+      }
+      .shortcut-item span {
+        font-size: 0.75rem; /* text-xs */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="subzone" id="subzone-template">
+      <div class="subzone-nav">
+        <span class="text-sm font-semibold" id="subzoneName">子区名称</span>
+        <div class="flex space-x-2">
+          <button class="nav-button hover:text-blue-400" title="锁定/解锁">
+            <i class="fas fa-lock"></i>
+          </button>
+          <button class="nav-button hover:text-red-400" title="删除">
+            <i class="fas fa-trash"></i>
+          </button>
+          <button
+            class="nav-button hover:text-green-400"
+            title="伪装"
+            onclick="parent.openDrawingDisguiseBlock(1)"
+          >
+            <i class="fas fa-mask"></i>
+          </button>
+          <button
+            class="nav-button hover:text-yellow-400"
+            title="显示/隐藏内容"
+          >
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+      <div class="subzone-content" id="subzoneContent">
+        <!-- 快捷方式将在此处动态加载 -->
+        <div class="shortcut-item" ondblclick="alert('启动应用: Chrome');">
+          <img
+            src="https://source.unsplash.com/random/40x40?chrome-icon"
+            alt="Chrome"
+          />
+          <span>Chrome 浏览器</span>
+        </div>
+        <div class="shortcut-item" ondblclick="alert('启动应用: VS Code');">
+          <img
+            src="https://source.unsplash.com/random/40x40?vscode-icon"
+            alt="VS Code"
+          />
+          <span>VS Code</span>
+        </div>
+        <div class="shortcut-item" ondblclick="alert('启动应用: Steam');">
+          <img
+            src="https://source.unsplash.com/random/40x40?steam-icon"
+            alt="Steam"
+          />
+          <span>Steam 游戏平台</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 此文件仅作为子区的 HTML 结构模板，不包含复杂的 JS 交互逻辑
+      // 实际的交互逻辑将在 index.html 或父级框架中实现，通过动态创建和操作此模板内容
+    </script>
+  </body>
+</html>

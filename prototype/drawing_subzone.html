@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制子区</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+      .drawing-area {
+        position: relative;
+        width: 90%;
+        height: 90%;
+        border: 2px dashed rgba(255, 255, 255, 0.7);
+        cursor: crosshair;
+        overflow: hidden;
+      }
+      .drawn-rectangle {
+        position: absolute;
+        background-color: rgba(0, 123, 255, 0.5);
+        border: 1px solid rgba(0, 123, 255, 0.8);
+      }
+      .control-buttons {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="drawing-area" id="drawingArea">
+      <div class="control-buttons">
+        <button
+          id="confirmBtn"
+          class="px-6 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none hidden"
+        >
+          确定绘制
+        </button>
+        <button
+          id="cancelBtn"
+          class="px-6 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none"
+        >
+          取消
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const drawingArea = document.getElementById("drawingArea");
+      const confirmBtn = document.getElementById("confirmBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+      let isDrawing = false;
+      let startX, startY;
+      let currentRect = null;
+
+      drawingArea.addEventListener("mousedown", (e) => {
+        if (e.button !== 0) return; // 只响应鼠标左键
+
+        isDrawing = true;
+        startX = e.clientX;
+        startY = e.clientY;
+
+        if (currentRect) {
+          drawingArea.removeChild(currentRect);
+        }
+
+        currentRect = document.createElement("div");
+        currentRect.className = "drawn-rectangle";
+        currentRect.style.left = `${startX}px`;
+        currentRect.style.top = `${startY}px`;
+        currentRect.style.width = "0px";
+        currentRect.style.height = "0px";
+        drawingArea.appendChild(currentRect);
+        confirmBtn.classList.add("hidden");
+      });
+
+      drawingArea.addEventListener("mousemove", (e) => {
+        if (!isDrawing) return;
+
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+
+        const width = Math.abs(currentX - startX);
+        const height = Math.abs(currentY - startY);
+        const left = Math.min(startX, currentX);
+        const top = Math.min(startY, currentY);
+
+        currentRect.style.left = `${left}px`;
+        currentRect.style.top = `${top}px`;
+        currentRect.style.width = `${width}px`;
+        currentRect.style.height = `${height}px`;
+      });
+
+      drawingArea.addEventListener("mouseup", () => {
+        if (!isDrawing) return;
+        isDrawing = false;
+        if (
+          currentRect &&
+          parseInt(currentRect.style.width) > 0 &&
+          parseInt(currentRect.style.height) > 0
+        ) {
+          confirmBtn.classList.remove("hidden");
+        } else {
+          confirmBtn.classList.add("hidden");
+          if (currentRect) {
+            drawingArea.removeChild(currentRect);
+            currentRect = null;
+          }
+        }
+      });
+
+      confirmBtn.addEventListener("click", () => {
+        if (currentRect) {
+          const rect = currentRect.getBoundingClientRect();
+          // 这里模拟将子区数据传递给父页面或后端
+          parent.console.log("绘制的子区信息:", {
+            x: rect.left,
+            y: rect.top,
+            width: rect.width,
+            height: rect.height,
+          });
+          parent.addSubzoneToDesktop(
+            Date.now(),
+            rect.left,
+            rect.top,
+            rect.width,
+            rect.height
+          ); // 模拟添加子区
+          parent.closeAppWindow(); // 关闭绘制界面
+        }
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        if (currentRect) {
+          drawingArea.removeChild(currentRect);
+          currentRect = null;
+        }
+        parent.closeAppWindow(); // 关闭绘制界面
+      });
+    </script>
+  </body>
+</html>

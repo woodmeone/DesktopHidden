@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制伪装块</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-image: url("https://images.unsplash.com/photo-1699990176527-4638c4d21b7c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* 模拟桌面背景 */
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        width: 100vw;
+        cursor: crosshair;
+      }
+      #overlay-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); /* 半透明遮罩 */
+      }
+      .control-panel {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <canvas id="overlay-canvas"></canvas>
+
+    <div class="control-panel">
+      <button
+        id="drawBtn"
+        class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 focus:outline-none"
+      >
+        <i class="fas fa-pencil-alt mr-2"></i>开始绘制
+      </button>
+      <button
+        id="clearBtn"
+        class="px-4 py-2 bg-gray-500 text-white rounded-md shadow-md hover:bg-gray-600 focus:outline-none"
+      >
+        <i class="fas fa-eraser mr-2"></i>清除
+      </button>
+      <button
+        id="confirmBtn"
+        class="px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 focus:outline-none"
+        disabled
+      >
+        <i class="fas fa-check mr-2"></i>确定生成
+      </button>
+      <button
+        id="cancelBtn"
+        class="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 focus:outline-none"
+      >
+        <i class="fas fa-times mr-2"></i>取消
+      </button>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("overlay-canvas");
+      const ctx = canvas.getContext("2d");
+      const drawBtn = document.getElementById("drawBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const confirmBtn = document.getElementById("confirmBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+
+      let isDrawing = false;
+      let points = [];
+      let associatedSubzoneId = null; // 用于存储关联的子区ID
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        redrawPath();
+      }
+
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // 从 URL 参数中获取 subzoneId
+      const urlParams = new URLSearchParams(window.location.search);
+      associatedSubzoneId = urlParams.get("subzoneId");
+      if (associatedSubzoneId) {
+        parent.console.log(`正在为子区 ${associatedSubzoneId} 绘制伪装块...`);
+      } else {
+        parent.console.warn("未找到关联的子区ID。伪装块将无法关联。");
+      }
+
+      function redrawPath() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (points.length > 1) {
+          ctx.beginPath();
+          ctx.moveTo(points[0].x, points[0].y);
+          for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+          }
+          ctx.strokeStyle = "white";
+          ctx.lineWidth = 2;
+          ctx.stroke();
+          ctx.fillStyle = "rgba(255, 255, 255, 0.3)"; // 填充半透明白色
+          ctx.fill();
+        }
+        confirmBtn.disabled = points.length < 3; // 至少需要3个点才能形成一个多边形
+      }
+
+      drawBtn.addEventListener("click", () => {
+        isDrawing = true;
+        drawBtn.disabled = true;
+        clearBtn.disabled = false;
+        canvas.style.cursor = "crosshair";
+        parent.console.log("开始绘制伪装块...");
+      });
+
+      clearBtn.addEventListener("click", () => {
+        points = [];
+        redrawPath();
+        isDrawing = false;
+        drawBtn.disabled = false;
+        clearBtn.disabled = true;
+        confirmBtn.disabled = true;
+        canvas.style.cursor = "default";
+        parent.console.log("已清除绘制。");
+      });
+
+      canvas.addEventListener("mousedown", (e) => {
+        if (!isDrawing) return;
+        points.push({ x: e.clientX, y: e.clientY });
+        redrawPath();
+      });
+
+      confirmBtn.addEventListener("click", () => {
+        if (points.length >= 3) {
+          parent.console.log("绘制的伪装块路径:", points);
+          if (associatedSubzoneId) {
+            parent.createDisguiseBlock(associatedSubzoneId, points);
+            parent.console.log(
+              `伪装块为子区 ${associatedSubzoneId} 生成成功！`
+            );
+          } else {
+            parent.console.warn("未关联子区，伪装块未生成。");
+          }
+          parent.closeAppWindow(); // 关闭抠图界面
+        }
+      });
+
+      cancelBtn.addEventListener("click", () => {
+        parent.closeAppWindow(); // 关闭抠图界面
+      });
+    </script>
+  </body>
+</html>

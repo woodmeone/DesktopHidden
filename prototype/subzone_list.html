@@ -1,0 +1,86 @@
+<div class="p-8 bg-gray-50 dark:bg-gray-800 h-full overflow-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100">
+      我的桌面子区
+    </h2>
+    <button
+      class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg shadow-md transition-colors duration-200"
+      onclick="parent.loadPage('drawing_subzone.html')"
+    >
+      <i class="fas fa-plus mr-2"></i> 新增子区
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- 示例子区卡片 1 -->
+    <div
+      class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center relative hover:shadow-xl transition-shadow duration-200"
+    >
+      <img
+        src="https://source.unsplash.com/random/120x80?office-desk"
+        alt="Subzone Thumbnail"
+        class="w-full h-32 object-cover rounded-md mb-4"
+      />
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+        常用应用
+      </h3>
+      <p class="text-gray-600 dark:text-gray-300 text-center text-sm mb-4">
+        包含浏览器、编辑器等常用快捷方式。
+      </p>
+      <div class="flex space-x-3">
+        <button
+          class="bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors"
+        >
+          编辑
+        </button>
+        <button
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+        >
+          删除
+        </button>
+        <button
+          class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+          onclick="parent.loadPage('drawing_disguise_block.html')"
+        >
+          伪装
+        </button>
+      </div>
+    </div>
+
+    <!-- 示例子区卡片 2 -->
+    <div
+      class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center relative hover:shadow-xl transition-shadow duration-200"
+    >
+      <img
+        src="https://source.unsplash.com/random/120x80?gaming-setup"
+        alt="Subzone Thumbnail"
+        class="w-full h-32 object-cover rounded-md mb-4"
+      />
+      <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
+        游戏收藏
+      </h3>
+      <p class="text-gray-600 dark:text-gray-300 text-center text-sm mb-4">
+        我的Steam游戏和Epic游戏快捷方式。
+      </p>
+      <div class="flex space-x-3">
+        <button
+          class="bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors"
+        >
+          编辑
+        </button>
+        <button
+          class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+        >
+          删除
+        </button>
+        <button
+          class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+        >
+          伪装
+        </button>
+      </div>
+    </div>
+
+    <!-- 更多子区卡片... -->
+  </div>
+</div>

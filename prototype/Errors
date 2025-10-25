@@ -1,0 +1,12 @@
+未能找到类型或命名空间名“SubZoneManager”(是否缺少 using 指令或程序集引用?)
+命名空间“DesktopHidden”中不存在类型或命名空间名“Managers”(是否缺少程序集引用?)
+命名空间“DesktopHidden”中不存在类型或命名空间名“Models”(是否缺少程序集引用?)
+未能找到类型或命名空间名“SubZoneModel”(是否缺少 using 指令或程序集引用?)
+未能找到类型或命名空间名“AppWindowResizePoint”(是否缺少 using 指令或程序集引用?)
+未能找到类型或命名空间名“DllImportAttribute”(是否缺少 using 指令或程序集引用?)
+未能找到类型或命名空间名“DllImport”(是否缺少 using 指令或程序集引用?)
+未能找到类型或命名空间名“CoreCursorType”(是否缺少 using 指令或程序集引用?)
+命名空间“DesktopHidden”中不存在类型或命名空间名“Models”(是否缺少程序集引用?)
+未能找到类型或命名空间名“SubZoneModel”(是否缺少 using 指令或程序集引用?)
+未能找到类型或命名空间名“SubZoneModel”(是否缺少 using 指令或程序集引用?)
+“SubZoneWindow.AppWindow”隐藏继承的成员“Window.AppWindow”。如果是有意隐藏，请使用关键字 new。

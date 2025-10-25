@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>子区列表</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #f9fafb; /* Tailwind gray-50 */
+        margin: 0;
+        padding: 20px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .subzone-card {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease-in-out;
+      }
+      .subzone-card:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="container mx-auto p-4">
+      <h1 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">
+        我的子区列表
+      </h1>
+
+      <div
+        id="subzoneList"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- 示例子区卡片 -->
+        <div class="subzone-card" id="subzoneCard-1">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold text-gray-900">
+              <i class="fas fa-box-open mr-2 text-blue-500"></i>子区 1: 常用应用
+            </h2>
+            <div class="flex space-x-2">
+              <button class="text-gray-500 hover:text-blue-600" title="编辑">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="text-gray-500 hover:text-red-600" title="删除">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4">
+            此子区用于存放日常使用的应用程序快捷方式。
+          </p>
+          <div class="flex items-center text-gray-700 mb-2">
+            <i class="fas fa-thumbtack mr-2"></i>
+            <span
+              >状态:
+              <span class="font-medium text-green-600">已锁定</span></span
+            >
+          </div>
+          <div class="flex items-center text-gray-700">
+            <i class="fas fa-eye mr-2"></i>
+            <span>内容可见: <span class="font-medium">是</span></span>
+          </div>
+        </div>
+
+        <div class="subzone-card" id="subzoneCard-2">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold text-gray-900">
+              <i class="fas fa-folder-open mr-2 text-purple-500"></i>子区 2:
+              工作文件
+            </h2>
+            <div class="flex space-x-2">
+              <button class="text-gray-500 hover:text-blue-600" title="编辑">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="text-gray-500 hover:text-red-600" title="删除">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+          <p class="text-gray-600 mb-4">
+            集中存放与项目相关的文件和文件夹快捷方式。
+          </p>
+          <div class="flex items-center text-gray-700 mb-2">
+            <i class="fas fa-thumbtack mr-2"></i>
+            <span
+              >状态: <span class="font-medium text-red-600">未锁定</span></span
+            >
+          </div>
+          <div class="flex items-center text-gray-700">
+            <i class="fas fa-eye-slash mr-2"></i>
+            <span>内容可见: <span class="font-medium">否</span></span>
+          </div>
+        </div>
+
+        <!-- 更多子区卡片将动态添加 -->
+
+        <button
+          class="subzone-card flex items-center justify-center border-2 border-dashed border-gray-300 text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors duration-200"
+          onclick="parent.openDrawingSubzone()"
+        >
+          <i class="fas fa-plus-circle text-5xl"></i>
+          <span class="ml-4 text-xl font-semibold">新增子区</span>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // 模拟从父级获取子区数据并渲染
+      document.addEventListener("DOMContentLoaded", () => {
+        // 假设父页面有一个全局变量或方法来提供子区数据
+        // const subzones = parent.getSubzoneData();
+        // 这里我们用一个模拟数据
+        const mockSubzones = [
+          // { id: 1, name: '常用应用', description: '此子区用于存放日常使用的应用程序快捷方式。', locked: true, contentVisible: true },
+          // { id: 2, name: '工作文件', description: '集中存放与项目相关的文件和文件夹快捷方式。', locked: false, contentVisible: false }
+        ];
+
+        const subzoneListContainer = document.getElementById("subzoneList");
+
+        mockSubzones.forEach((subzone) => {
+          const cardHtml = `
+                    <div class="subzone-card" id="subzoneCard-${subzone.id}">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-xl font-semibold text-gray-900"><i class="fas fa-box-open mr-2 ${
+                              subzone.locked
+                                ? "text-blue-500"
+                                : "text-purple-500"
+                            }"></i>子区 ${subzone.id}: ${subzone.name}</h2>
+                            <div class="flex space-x-2">
+                                <button class="text-gray-500 hover:text-blue-600" title="编辑"><i class="fas fa-edit"></i></button>
+                                <button class="text-gray-500 hover:text-red-600" title="删除"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-4">${subzone.description}</p>
+                        <div class="flex items-center text-gray-700 mb-2">
+                            <i class="fas fa-thumbtack mr-2"></i>
+                            <span>状态: <span class="font-medium ${
+                              subzone.locked ? "text-green-600" : "text-red-600"
+                            }">${
+            subzone.locked ? "已锁定" : "未锁定"
+          }</span></span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i class="${
+                              subzone.contentVisible
+                                ? "fas fa-eye"
+                                : "fas fa-eye-slash"
+                            } mr-2"></i>
+                            <span>内容可见: <span class="font-medium">${
+                              subzone.contentVisible ? "是" : "否"
+                            }</span></span>
+                        </div>
+                    </div>
+                `;
+          subzoneListContainer.insertAdjacentHTML("afterbegin", cardHtml); // 插入到“新增子区”按钮之前
+        });
+      });
+    </script>
+  </body>
+</html>

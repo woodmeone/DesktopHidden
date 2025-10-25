@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型图查看器</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f0f2f5;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+      h1 {
+        color: #2d3748;
+        margin-bottom: 24px;
+        text-align: center;
+      }
+      .iframe-container {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 30px;
+      }
+      .iframe-header {
+        background-color: #edf2f7;
+        padding: 12px 16px;
+        font-weight: 600;
+        color: #4a5568;
+        border-bottom: 1px solid #e2e8f0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+      }
+      .iframe-wrapper {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background: #000;
+      }
+
+      .iframe-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-4xl font-extrabold">桌面美化程序原型图查看器</h1>
+
+      <div class="iframe-container">
+        <div class="iframe-header">
+          <span>主应用程序框架 (index.html)</span>
+          <a
+            href="prototype/index.html"
+            target="_blank"
+            class="text-blue-600 hover:underline text-sm"
+            >在新窗口打开</a
+          >
+        </div>
+        <div class="iframe-wrapper">
+          <iframe src="prototype/index.html"></iframe>
+        </div>
+      </div>
+
+      <div class="iframe-container">
+        <div class="iframe-header">
+          <span>子区管理界面 (subzone_list.html)</span>
+          <a
+            href="prototype/subzone_list.html"
+            target="_blank"
+            class="text-blue-600 hover:underline text-sm"
+            >在新窗口打开</a
+          >
+        </div>
+        <div class="iframe-wrapper">
+          <iframe src="prototype/subzone_list.html"></iframe>
+        </div>
+      </div>
+
+      <div class="iframe-container">
+        <div class="iframe-header">
+          <span>子区绘制模式界面 (drawing_subzone.html)</span>
+          <a
+            href="prototype/drawing_subzone.html"
+            target="_blank"
+            class="text-blue-600 hover:underline text-sm"
+            >在新窗口打开</a
+          >
+        </div>
+        <div class="iframe-wrapper">
+          <iframe src="prototype/drawing_subzone.html"></iframe>
+        </div>
+      </div>
+
+      <div class="iframe-container">
+        <div class="iframe-header">
+          <span>伪装块绘制界面 (drawing_disguise_block.html)</span>
+          <a
+            href="prototype/drawing_disguise_block.html"
+            target="_blank"
+            class="text-blue-600 hover:underline text-sm"
+            >在新窗口打开</a
+          >
+        </div>
+        <div class="iframe-wrapper">
+          <iframe src="prototype/drawing_disguise_block.html"></iframe>
+        </div>
+      </div>
+
+      <div class="iframe-container">
+        <div class="iframe-header">
+          <span>程序设置界面 (settings.html)</span>
+          <a
+            href="prototype/settings.html"
+            target="_blank"
+            class="text-blue-600 hover:underline text-sm"
+            >在新窗口打开</a
+          >
+        </div>
+        <div class="iframe-wrapper">
+          <iframe src="prototype/settings.html"></iframe>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

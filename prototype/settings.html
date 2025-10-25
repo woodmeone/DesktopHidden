@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>全局设置</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        background-color: #f3f4f6; /* Tailwind gray-100 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .settings-container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .slider {
+        background-color: #2196f3; /* Tailwind blue-500 */
+      }
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+    </style>
+  </head>
+  <body class="font-sans antialiased">
+    <div class="settings-container">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">
+        全局设置
+      </h2>
+
+      <div class="mb-6 flex items-center justify-between">
+        <label for="autostart" class="text-lg text-gray-700"
+          ><i class="fas fa-play-circle mr-3 text-blue-500"></i
+          >开机自启动</label
+        >
+        <label class="toggle-switch">
+          <input type="checkbox" id="autostart" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="mb-6 flex items-center justify-between">
+        <label for="multiMonitor" class="text-lg text-gray-700"
+          ><i class="fas fa-desktop mr-3 text-green-500"></i>多显示器支持</label
+        >
+        <label class="toggle-switch">
+          <input type="checkbox" id="multiMonitor" checked disabled />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="mt-10 flex justify-center gap-4">
+        <button
+          id="saveSettings"
+          class="px-8 py-3 bg-indigo-600 text-white rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50"
+        >
+          <i class="fas fa-save mr-2"></i>保存设置
+        </button>
+        <button
+          id="closeSettings"
+          class="px-8 py-3 bg-gray-300 text-gray-800 rounded-lg shadow-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50"
+        >
+          <i class="fas fa-times mr-2"></i>关闭
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const autostartToggle = document.getElementById("autostart");
+      const saveSettingsBtn = document.getElementById("saveSettings");
+      const closeSettingsBtn = document.getElementById("closeSettings");
+
+      // 模拟加载设置
+      document.addEventListener("DOMContentLoaded", () => {
+        // 实际应用中会从本地存储加载
+        const savedAutostart = localStorage.getItem("autostart") === "true";
+        autostartToggle.checked = savedAutostart;
+      });
+
+      saveSettingsBtn.addEventListener("click", () => {
+        const newAutostartSetting = autostartToggle.checked;
+        localStorage.setItem("autostart", newAutostartSetting);
+        parent.console.log("设置已保存:", { autostart: newAutostartSetting });
+        parent.closeAppWindow();
+        parent.console.log("全局设置已保存并关闭。");
+      });
+
+      closeSettingsBtn.addEventListener("click", () => {
+        parent.closeAppWindow();
+        parent.console.log("全局设置已关闭。");
+      });
+    </script>
+  </body>
+</html>
