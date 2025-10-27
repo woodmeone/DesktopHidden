@@ -6,11 +6,13 @@
   xmlns:local="using:DesktopHidden.Views"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:converters="using:DesktopHidden.Converters"
   mc:Ignorable="d"
   d:DesignHeight="150"
   d:DesignWidth="200">
 
   <UserControl.Resources>
+    <converters:BooleanToLockIconConverter x:Key="BooleanToLockIconConverter" />
     <Style x:Key="SubZoneNavBarButton" TargetType="Button">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="White" />
@@ -25,6 +27,7 @@
 
   <Border x:ConnectionId='2' x:Name="SubZoneBorder" CornerRadius="5" Background="{Binding BackgroundColor}"
     Opacity="{Binding Opacity}">
+    <!-- Fallback Background for design time or if binding fails -->
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="30" />
@@ -38,22 +41,27 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
           <!-- 锁定按钮 -->
           <Button x:ConnectionId='5' Style="{StaticResource SubZoneNavBarButton}"                         >
-            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="{Binding IsLocked, Converter={StaticResource BooleanToLockIconConverter}}" /> <!-- 锁定图标 -->
+            <FontIcon FontFamily="Segoe Fluent Icons"
+              Glyph="{Binding IsLocked, Converter={StaticResource BooleanToLockIconConverter}}"
+              Foreground="White" /> <!-- 明确设置前景颜色 -->
           </Button>
-          
+
           <!-- 删除按钮 -->
           <Button x:ConnectionId='6' Style="{StaticResource SubZoneNavBarButton}"                           >
-            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE74D;" /> <!-- 删除图标 -->
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE74D;" Foreground="White" /> <!--
+            明确设置前景颜色 -->
           </Button>
 
           <!-- 下拉框按钮 (隐藏/显示内容) -->
           <Button x:ConnectionId='7' Style="{StaticResource SubZoneNavBarButton}"                                  >
-            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE70D;" /> <!-- 下拉图标 -->
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE70D;" Foreground="White" /> <!--
+            明确设置前景颜色 -->
           </Button>
 
           <!-- 伪装按钮 -->
           <Button x:ConnectionId='8' Style="{StaticResource SubZoneNavBarButton}"                             >
-            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7B3;" /> <!-- 伪装图标 -->
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7B3;" Foreground="White" /> <!--
+            明确设置前景颜色 -->
           </Button>
         </StackPanel>
       </Grid>

@@ -15,6 +15,7 @@ namespace DesktopHidden.Views
 {
     public sealed partial class SubZoneWindow : Window
     {
+        public event EventHandler<Guid> RequestClose; // 添加 RequestClose 事件
         public SubZoneModel SubZoneModel { get; set; }
         public new AppWindow AppWindow => _appWindow; // 提供公共访问器
         private AppWindow _appWindow;
@@ -30,6 +31,7 @@ namespace DesktopHidden.Views
             SubZoneUserControl = new SubZoneView(this); // 实例化 SubZoneView 并传递当前 SubZoneWindow 实例
             SubZoneUserControl.DataContext = SubZoneModel;
             this.Content = SubZoneUserControl; // 设置窗口内容为 SubZoneView
+            SubZoneUserControl.PointerPressed += SubZoneUserControl_PointerPressed; // 订阅 PointerPressed 事件
 
             // 获取窗口句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
@@ -56,6 +58,18 @@ namespace DesktopHidden.Views
 
             // 监听AppWindow的Changed事件来更新SubZoneModel的位置和大小
             _appWindow.Changed += AppWindow_Changed;
+        }
+
+        // 用于触发 RequestClose 事件的方法
+        public void OnRequestClose() => RequestClose?.Invoke(this, SubZoneModel.Id);
+
+        // 设置窗口是否可调整大小的方法
+        public void SetResizable(bool canResize)
+        {
+            if (_appWindow.Presenter is OverlappedPresenter overlappedPresenter)
+            {
+                overlappedPresenter.IsResizable = canResize;
+            }
         }
 
         private void AppWindow_Changed(AppWindow sender, AppWindowChangedEventArgs args)

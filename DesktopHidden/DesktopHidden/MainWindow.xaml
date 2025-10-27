@@ -15,6 +15,6 @@
 
   <Grid>
     <Button Content="新增子区" HorizontalAlignment="Center" VerticalAlignment="Center"
-      Click="AddSubZoneButton_Click" />
+      Click="AddSubZoneButton_Click" Foreground="White" />
   </Grid>
 </Window>

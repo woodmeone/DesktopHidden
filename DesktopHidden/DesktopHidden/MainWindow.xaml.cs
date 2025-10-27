@@ -44,9 +44,27 @@ namespace DesktopHidden
                 foreach (Models.SubZoneModel newSubZoneModel in e.NewItems)
                 {
                     var subZoneWindow = new SubZoneWindow(newSubZoneModel);
+                    subZoneWindow.RequestClose += SubZoneWindow_RequestClose; // 订阅 RequestClose 事件
                     App.Windows.Add(subZoneWindow); // 将子区窗口添加到全局列表中
                     subZoneWindow.Activate();
                 }
+            }
+        }
+
+        private void SubZoneWindow_RequestClose(object? sender, Guid subZoneId)
+        {
+            // 从 App.Windows 列表中移除并关闭对应的 SubZoneWindow
+            var windowToRemove = App.Windows.FirstOrDefault(w => (w as SubZoneWindow)?.SubZoneModel.Id == subZoneId);
+            if (windowToRemove != null)
+            {
+                App.Windows.Remove(windowToRemove);
+                windowToRemove.Close();
+            }
+            // 同时从 SubZoneManager 中移除对应的 SubZoneModel
+            var modelToRemove = _subZoneManager.SubZones.FirstOrDefault(m => m.Id == subZoneId);
+            if (modelToRemove != null)
+            {
+                _subZoneManager.SubZones.Remove(modelToRemove);
             }
         }
 

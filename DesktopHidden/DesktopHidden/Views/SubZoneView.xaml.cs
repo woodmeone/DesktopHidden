@@ -12,6 +12,7 @@ using Windows.System;
 using Windows.UI.Core; // Add this for CoreCursorType
 using WinRT.Interop;
 using Microsoft.UI.Xaml.Media; // Add this for VisualTreeHelper
+using DesktopHidden.Converters; // Add this using statement
 
 namespace DesktopHidden.Views
 {
@@ -76,13 +77,14 @@ namespace DesktopHidden.Views
             if (SubZoneModel != null)
             {
                 SubZoneModel.IsLocked = !SubZoneModel.IsLocked; // 切换锁定状态
-                // TODO: 更新UI以反映锁定状态
+                ParentWindow?.SetResizable(!SubZoneModel.IsLocked); // 根据锁定状态设置窗口是否可调整大小
             }
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: 实现删除子区功能。这通常需要通知父级（如 MainWindow）来移除这个 SubZoneWindow。
+            // 调用父窗口的 RequestClose 事件来请求关闭子区窗口。
+            ParentWindow?.OnRequestClose();
         }
 
         private void ToggleContentButton_Click(object sender, RoutedEventArgs e)
