@@ -15,7 +15,6 @@
       <SolidColorBrush x:Key="WindowCaptionForeground" Color="Black" />
       <SolidColorBrush x:Key="WindowCaptionForegroundDisabled" Color="DarkGray" />
     </Grid.Resources>
-    <local:SubZoneView x:Name="SubZoneUserControl"
-      PointerPressed="SubZoneUserControl_PointerPressed" />
+    <!-- 将 SubZoneUserControl 的声明从 XAML 移除，改为在代码后端实例化 -->
   </Grid>
 </Window>

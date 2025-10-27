@@ -1,0 +1,40 @@
+# Visual Studio 相关的忽略文件
+.vs/
+*.suo
+*.user
+*.userprefs
+*.VC.opendb
+*.VC.db
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.exe
+*.pdb
+*.tmp
+*.log
+*.bak
+*.cache
+*.vspscc
+*.vssscc
+*.buildscc
+
+# Package 管理相关的忽略文件 (NuGet)
+packages/
+*.nuget.dgspec.json
+*.nuget.g.props
+*.nuget.g.targets
+project.assets.json
+
+# Visual Studio Code 相关的忽略文件 (如果使用 VS Code 开发)
+.vscode/
+
+# 操作系统相关的忽略文件
+.DS_Store
+Thumbs.db
+
+# 发布目录
+publish/

@@ -18,6 +18,7 @@ namespace DesktopHidden.Views
         public SubZoneModel SubZoneModel { get; set; }
         public new AppWindow AppWindow => _appWindow; // 提供公共访问器
         private AppWindow _appWindow;
+        private SubZoneView SubZoneUserControl; // 声明 SubZoneView 字段
 
         public SubZoneWindow(SubZoneModel subZoneModel)
         {
@@ -26,7 +27,9 @@ namespace DesktopHidden.Views
             this.Title = "子区 " + subZoneModel.Id.ToString().Substring(0, 4); // 简单标题
 
             // 将SubZoneModel绑定到SubZoneView
+            SubZoneUserControl = new SubZoneView(this); // 实例化 SubZoneView 并传递当前 SubZoneWindow 实例
             SubZoneUserControl.DataContext = SubZoneModel;
+            this.Content = SubZoneUserControl; // 设置窗口内容为 SubZoneView
 
             // 获取窗口句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
@@ -69,6 +72,12 @@ namespace DesktopHidden.Views
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
             WindowId windowId = Win32WindowUtility.GetWindowIdFromWindow(hWnd);
             return AppWindow.GetFromWindowId(windowId);
+        }
+
+        public void StartDragging()
+        {
+            IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            Win32WindowUtility.SendMessage(hWnd, Win32WindowUtility.WM_NCLBUTTONDOWN, Win32WindowUtility.HTCAPTION, 0);
         }
 
         private const double ResizeBorder = 8; // 边缘宽度
@@ -145,44 +154,12 @@ namespace DesktopHidden.Views
                     }
                     Win32WindowUtility.SendMessage(hWnd, Win32WindowUtility.WM_NCLBUTTONDOWN, htParam, 0);
                 }
-                else
-                {
-                    Win32WindowUtility.SendMessage(hWnd, Win32WindowUtility.WM_NCLBUTTONDOWN, Win32WindowUtility.HTCAPTION, 0);
-                }
             }
         }
 
-        private void DragResizeGrid_PointerMoved(object sender, PointerRoutedEventArgs e)
-        {
-            if (SubZoneModel != null && SubZoneModel.IsLocked) return; // 锁定状态下不允许拖拽和调整大小
-
-            if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
-            {
-                Windows.Foundation.Point mousePosition = e.GetCurrentPoint(sender as UIElement).Position;
-                ResizeDirection direction = GetResizeDirection(mousePosition);
-
-                switch (direction)
-                {
-                    case ResizeDirection.Left: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeWestEast, 1))); break;
-                    case ResizeDirection.Right: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeWestEast, 1))); break;
-                    case ResizeDirection.Top: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeNorthSouth, 1))); break;
-                    case ResizeDirection.Bottom: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeNorthSouth, 1))); break;
-                    case ResizeDirection.TopLeft: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeAll, 1))); break; // 更改为 SizeAll
-                    case ResizeDirection.TopRight: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeAll, 1))); break; // 更改为 SizeAll
-                    case ResizeDirection.BottomLeft: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeAll, 1))); break; // 更改为 SizeAll
-                    case ResizeDirection.BottomRight: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.SizeAll, 1))); break; // 更改为 SizeAll
-                    default: CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.Arrow, 1))); break;
-                }
-            }
-        }
-
-        private void DragResizeGrid_PointerReleased(object sender, PointerRoutedEventArgs e)
-        {
-            // PointerReleased 事件主要用于结束拖拽和调整大小状态，
-            // 由于我们使用系统级方法，这里不需要额外的逻辑来停止操作，
-            // 只需要确保鼠标光标恢复正常即可。
-            CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.Arrow, 1)));
-        }
+        // 不再需要 SubZoneUserControl_PointerMoved 和 SubZoneUserControl_PointerReleased 方法，
+        // 因为 SubZoneView 会直接处理 NavBar_PointerPressed 来进行拖拽，
+        // 并且调整大小的逻辑已经通过 SubZoneUserControl_PointerPressed 中的 SendMessage 处理。
     }
 
     public static class CustomInputCursor

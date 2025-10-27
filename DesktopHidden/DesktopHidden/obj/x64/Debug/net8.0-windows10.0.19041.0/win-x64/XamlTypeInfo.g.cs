@@ -226,49 +226,51 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
         
         private void InitTypeTables()
         {
-            _typeNameTable = new string[20];
+            _typeNameTable = new string[21];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Microsoft.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
             _typeNameTable[3] = "Boolean";
-            _typeNameTable[4] = "Microsoft.UI.Xaml.Media.MicaBackdrop";
-            _typeNameTable[5] = "Microsoft.UI.Xaml.Media.SystemBackdrop";
-            _typeNameTable[6] = "Microsoft.UI.Composition.SystemBackdrops.MicaKind";
-            _typeNameTable[7] = "System.Enum";
-            _typeNameTable[8] = "System.ValueType";
-            _typeNameTable[9] = "DesktopHidden.MainWindow";
-            _typeNameTable[10] = "Microsoft.UI.Xaml.Window";
-            _typeNameTable[11] = "DesktopHidden.Views.SubZoneView";
-            _typeNameTable[12] = "Microsoft.UI.Xaml.Controls.UserControl";
-            _typeNameTable[13] = "DesktopHidden.Models.SubZoneModel";
+            _typeNameTable[4] = "DesktopHidden.Converters.BooleanToLockIconConverter";
+            _typeNameTable[5] = "Microsoft.UI.Xaml.Media.MicaBackdrop";
+            _typeNameTable[6] = "Microsoft.UI.Xaml.Media.SystemBackdrop";
+            _typeNameTable[7] = "Microsoft.UI.Composition.SystemBackdrops.MicaKind";
+            _typeNameTable[8] = "System.Enum";
+            _typeNameTable[9] = "System.ValueType";
+            _typeNameTable[10] = "DesktopHidden.MainWindow";
+            _typeNameTable[11] = "Microsoft.UI.Xaml.Window";
+            _typeNameTable[12] = "DesktopHidden.Views.SubZoneView";
+            _typeNameTable[13] = "Microsoft.UI.Xaml.Controls.UserControl";
             _typeNameTable[14] = "DesktopHidden.Views.SubZoneWindow";
-            _typeNameTable[15] = "Microsoft.UI.Windowing.AppWindow";
-            _typeNameTable[16] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
-            _typeNameTable[17] = "Microsoft.UI.Xaml.DependencyObject";
-            _typeNameTable[18] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
-            _typeNameTable[19] = "Int32";
+            _typeNameTable[15] = "DesktopHidden.Models.SubZoneModel";
+            _typeNameTable[16] = "Microsoft.UI.Windowing.AppWindow";
+            _typeNameTable[17] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
+            _typeNameTable[18] = "Microsoft.UI.Xaml.DependencyObject";
+            _typeNameTable[19] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
+            _typeNameTable[20] = "Int32";
 
-            _typeTable = new global::System.Type[20];
+            _typeTable = new global::System.Type[21];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Microsoft.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
             _typeTable[3] = typeof(global::System.Boolean);
-            _typeTable[4] = typeof(global::Microsoft.UI.Xaml.Media.MicaBackdrop);
-            _typeTable[5] = typeof(global::Microsoft.UI.Xaml.Media.SystemBackdrop);
-            _typeTable[6] = typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind);
-            _typeTable[7] = typeof(global::System.Enum);
-            _typeTable[8] = typeof(global::System.ValueType);
-            _typeTable[9] = typeof(global::DesktopHidden.MainWindow);
-            _typeTable[10] = typeof(global::Microsoft.UI.Xaml.Window);
-            _typeTable[11] = typeof(global::DesktopHidden.Views.SubZoneView);
-            _typeTable[12] = typeof(global::Microsoft.UI.Xaml.Controls.UserControl);
-            _typeTable[13] = typeof(global::DesktopHidden.Models.SubZoneModel);
+            _typeTable[4] = typeof(global::DesktopHidden.Converters.BooleanToLockIconConverter);
+            _typeTable[5] = typeof(global::Microsoft.UI.Xaml.Media.MicaBackdrop);
+            _typeTable[6] = typeof(global::Microsoft.UI.Xaml.Media.SystemBackdrop);
+            _typeTable[7] = typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind);
+            _typeTable[8] = typeof(global::System.Enum);
+            _typeTable[9] = typeof(global::System.ValueType);
+            _typeTable[10] = typeof(global::DesktopHidden.MainWindow);
+            _typeTable[11] = typeof(global::Microsoft.UI.Xaml.Window);
+            _typeTable[12] = typeof(global::DesktopHidden.Views.SubZoneView);
+            _typeTable[13] = typeof(global::Microsoft.UI.Xaml.Controls.UserControl);
             _typeTable[14] = typeof(global::DesktopHidden.Views.SubZoneWindow);
-            _typeTable[15] = typeof(global::Microsoft.UI.Windowing.AppWindow);
-            _typeTable[16] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
-            _typeTable[17] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
-            _typeTable[18] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
-            _typeTable[19] = typeof(global::System.Int32);
+            _typeTable[15] = typeof(global::DesktopHidden.Models.SubZoneModel);
+            _typeTable[16] = typeof(global::Microsoft.UI.Windowing.AppWindow);
+            _typeTable[17] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
+            _typeTable[18] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
+            _typeTable[19] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
+            _typeTable[20] = typeof(global::System.Int32);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -304,23 +306,24 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
         }
 
         private object Activate_0_XamlControlsResources() { return new global::Microsoft.UI.Xaml.Controls.XamlControlsResources(); }
-        private object Activate_4_MicaBackdrop() { return new global::Microsoft.UI.Xaml.Media.MicaBackdrop(); }
-        private object Activate_9_MainWindow() { return new global::DesktopHidden.MainWindow(); }
-        private object Activate_11_SubZoneView() { return new global::DesktopHidden.Views.SubZoneView(); }
-        private object Activate_13_SubZoneModel() { return new global::DesktopHidden.Models.SubZoneModel(); }
-        private object Activate_16_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
+        private object Activate_4_BooleanToLockIconConverter() { return new global::DesktopHidden.Converters.BooleanToLockIconConverter(); }
+        private object Activate_5_MicaBackdrop() { return new global::Microsoft.UI.Xaml.Media.MicaBackdrop(); }
+        private object Activate_10_MainWindow() { return new global::DesktopHidden.MainWindow(); }
+        private object Activate_15_SubZoneModel() { return new global::DesktopHidden.Models.SubZoneModel(); }
+        private object Activate_17_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
         private void StaticInitializer_0_XamlControlsResources() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources).TypeHandle);
-        private void StaticInitializer_4_MicaBackdrop() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Media.MicaBackdrop).TypeHandle);
-        private void StaticInitializer_6_MicaKind() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind).TypeHandle);
-        private void StaticInitializer_7_Enum() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Enum).TypeHandle);
-        private void StaticInitializer_8_ValueType() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.ValueType).TypeHandle);
-        private void StaticInitializer_9_MainWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.MainWindow).TypeHandle);
-        private void StaticInitializer_11_SubZoneView() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneView).TypeHandle);
-        private void StaticInitializer_13_SubZoneModel() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Models.SubZoneModel).TypeHandle);
+        private void StaticInitializer_4_BooleanToLockIconConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Converters.BooleanToLockIconConverter).TypeHandle);
+        private void StaticInitializer_5_MicaBackdrop() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Media.MicaBackdrop).TypeHandle);
+        private void StaticInitializer_7_MicaKind() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Composition.SystemBackdrops.MicaKind).TypeHandle);
+        private void StaticInitializer_8_Enum() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Enum).TypeHandle);
+        private void StaticInitializer_9_ValueType() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.ValueType).TypeHandle);
+        private void StaticInitializer_10_MainWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.MainWindow).TypeHandle);
+        private void StaticInitializer_12_SubZoneView() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneView).TypeHandle);
         private void StaticInitializer_14_SubZoneWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneWindow).TypeHandle);
-        private void StaticInitializer_15_AppWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Windowing.AppWindow).TypeHandle);
-        private void StaticInitializer_16_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
-        private void StaticInitializer_18_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
+        private void StaticInitializer_15_SubZoneModel() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Models.SubZoneModel).TypeHandle);
+        private void StaticInitializer_16_AppWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Windowing.AppWindow).TypeHandle);
+        private void StaticInitializer_17_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
+        private void StaticInitializer_19_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -328,7 +331,7 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
             var newItem = (global::System.Object)item;
             collection.Add(newKey, newItem);
         }
-        private void VectorAdd_18_IList(object instance, object item)
+        private void VectorAdd_19_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Microsoft.UI.Xaml.Controls.TreeViewNode>)instance;
             var newItem = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)item;
@@ -366,69 +369,69 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 4:   //  Microsoft.UI.Xaml.Media.MicaBackdrop
+            case 4:   //  DesktopHidden.Converters.BooleanToLockIconConverter
+                userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_4_BooleanToLockIconConverter;
+                userType.StaticInitializer = StaticInitializer_4_BooleanToLockIconConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 5:   //  Microsoft.UI.Xaml.Media.MicaBackdrop
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Media.SystemBackdrop"));
-                userType.Activator = Activate_4_MicaBackdrop;
-                userType.StaticInitializer = StaticInitializer_4_MicaBackdrop;
+                userType.Activator = Activate_5_MicaBackdrop;
+                userType.StaticInitializer = StaticInitializer_5_MicaBackdrop;
                 userType.AddMemberName("Kind");
                 xamlType = userType;
                 break;
 
-            case 5:   //  Microsoft.UI.Xaml.Media.SystemBackdrop
+            case 6:   //  Microsoft.UI.Xaml.Media.SystemBackdrop
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 6:   //  Microsoft.UI.Composition.SystemBackdrops.MicaKind
+            case 7:   //  Microsoft.UI.Composition.SystemBackdrops.MicaKind
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
-                userType.StaticInitializer = StaticInitializer_6_MicaKind;
+                userType.StaticInitializer = StaticInitializer_7_MicaKind;
                 userType.AddEnumValue("Base", global::Microsoft.UI.Composition.SystemBackdrops.MicaKind.Base);
                 userType.AddEnumValue("BaseAlt", global::Microsoft.UI.Composition.SystemBackdrops.MicaKind.BaseAlt);
                 xamlType = userType;
                 break;
 
-            case 7:   //  System.Enum
+            case 8:   //  System.Enum
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
-                userType.StaticInitializer = StaticInitializer_7_Enum;
+                userType.StaticInitializer = StaticInitializer_8_Enum;
                 xamlType = userType;
                 break;
 
-            case 8:   //  System.ValueType
+            case 9:   //  System.ValueType
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_8_ValueType;
+                userType.StaticInitializer = StaticInitializer_9_ValueType;
                 xamlType = userType;
                 break;
 
-            case 9:   //  DesktopHidden.MainWindow
+            case 10:   //  DesktopHidden.MainWindow
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Window"));
-                userType.Activator = Activate_9_MainWindow;
-                userType.StaticInitializer = StaticInitializer_9_MainWindow;
+                userType.Activator = Activate_10_MainWindow;
+                userType.StaticInitializer = StaticInitializer_10_MainWindow;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 10:   //  Microsoft.UI.Xaml.Window
+            case 11:   //  Microsoft.UI.Xaml.Window
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 11:   //  DesktopHidden.Views.SubZoneView
+            case 12:   //  DesktopHidden.Views.SubZoneView
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Controls.UserControl"));
-                userType.Activator = Activate_11_SubZoneView;
-                userType.StaticInitializer = StaticInitializer_11_SubZoneView;
+                userType.StaticInitializer = StaticInitializer_12_SubZoneView;
+                userType.AddMemberName("ParentWindow");
                 userType.AddMemberName("SubZoneModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 12:   //  Microsoft.UI.Xaml.Controls.UserControl
+            case 13:   //  Microsoft.UI.Xaml.Controls.UserControl
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
-                break;
-
-            case 13:   //  DesktopHidden.Models.SubZoneModel
-                userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_13_SubZoneModel;
-                userType.SetIsReturnTypeStub();
-                userType.SetIsLocalType();
-                xamlType = userType;
                 break;
 
             case 14:   //  DesktopHidden.Views.SubZoneWindow
@@ -440,17 +443,25 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 15:   //  Microsoft.UI.Windowing.AppWindow
+            case 15:   //  DesktopHidden.Models.SubZoneModel
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_15_AppWindow;
+                userType.StaticInitializer = StaticInitializer_15_SubZoneModel;
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 16:   //  Microsoft.UI.Windowing.AppWindow
+                userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.StaticInitializer = StaticInitializer_16_AppWindow;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 16:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
+            case 17:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_16_TreeViewNode;
-                userType.StaticInitializer = StaticInitializer_16_TreeViewNode;
+                userType.Activator = Activate_17_TreeViewNode;
+                userType.StaticInitializer = StaticInitializer_17_TreeViewNode;
                 userType.AddMemberName("Children");
                 userType.AddMemberName("Content");
                 userType.AddMemberName("Depth");
@@ -462,19 +473,19 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 17:   //  Microsoft.UI.Xaml.DependencyObject
+            case 18:   //  Microsoft.UI.Xaml.DependencyObject
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 18:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
+            case 19:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.StaticInitializer = StaticInitializer_18_IList;
-                userType.CollectionAdd = VectorAdd_18_IList;
+                userType.StaticInitializer = StaticInitializer_19_IList;
+                userType.CollectionAdd = VectorAdd_19_IList;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 19:   //  Int32
+            case 20:   //  Int32
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
@@ -556,72 +567,82 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
             var that = (global::Microsoft.UI.Xaml.Media.MicaBackdrop)instance;
             that.Kind = (global::Microsoft.UI.Composition.SystemBackdrops.MicaKind)Value;
         }
-        private object get_2_SubZoneView_SubZoneModel(object instance)
+        private object get_2_SubZoneView_ParentWindow(object instance)
+        {
+            var that = (global::DesktopHidden.Views.SubZoneView)instance;
+            return that.ParentWindow;
+        }
+        private void set_2_SubZoneView_ParentWindow(object instance, object Value)
+        {
+            var that = (global::DesktopHidden.Views.SubZoneView)instance;
+            that.ParentWindow = (global::DesktopHidden.Views.SubZoneWindow)Value;
+        }
+        private object get_3_SubZoneView_SubZoneModel(object instance)
         {
             var that = (global::DesktopHidden.Views.SubZoneView)instance;
             return that.SubZoneModel;
         }
-        private object get_3_SubZoneWindow_SubZoneModel(object instance)
+        private object get_4_SubZoneWindow_SubZoneModel(object instance)
         {
             var that = (global::DesktopHidden.Views.SubZoneWindow)instance;
             return that.SubZoneModel;
         }
-        private void set_3_SubZoneWindow_SubZoneModel(object instance, object Value)
+        private void set_4_SubZoneWindow_SubZoneModel(object instance, object Value)
         {
             var that = (global::DesktopHidden.Views.SubZoneWindow)instance;
             that.SubZoneModel = (global::DesktopHidden.Models.SubZoneModel)Value;
         }
-        private object get_4_SubZoneWindow_AppWindow(object instance)
+        private object get_5_SubZoneWindow_AppWindow(object instance)
         {
             var that = (global::DesktopHidden.Views.SubZoneWindow)instance;
             return that.AppWindow;
         }
-        private object get_5_TreeViewNode_Children(object instance)
+        private object get_6_TreeViewNode_Children(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Children;
         }
-        private object get_6_TreeViewNode_Content(object instance)
+        private object get_7_TreeViewNode_Content(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Content;
         }
-        private void set_6_TreeViewNode_Content(object instance, object Value)
+        private void set_7_TreeViewNode_Content(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.Content = (global::System.Object)Value;
         }
-        private object get_7_TreeViewNode_Depth(object instance)
+        private object get_8_TreeViewNode_Depth(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Depth;
         }
-        private object get_8_TreeViewNode_HasChildren(object instance)
+        private object get_9_TreeViewNode_HasChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasChildren;
         }
-        private object get_9_TreeViewNode_HasUnrealizedChildren(object instance)
+        private object get_10_TreeViewNode_HasUnrealizedChildren(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.HasUnrealizedChildren;
         }
-        private void set_9_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
+        private void set_10_TreeViewNode_HasUnrealizedChildren(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.HasUnrealizedChildren = (global::System.Boolean)Value;
         }
-        private object get_10_TreeViewNode_IsExpanded(object instance)
+        private object get_11_TreeViewNode_IsExpanded(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.IsExpanded;
         }
-        private void set_10_TreeViewNode_IsExpanded(object instance, object Value)
+        private void set_11_TreeViewNode_IsExpanded(object instance, object Value)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             that.IsExpanded = (global::System.Boolean)Value;
         }
-        private object get_11_TreeViewNode_Parent(object instance)
+        private object get_12_TreeViewNode_Parent(object instance)
         {
             var that = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)instance;
             return that.Parent;
@@ -648,68 +669,74 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlMember.Getter = get_1_MicaBackdrop_Kind;
                 xamlMember.Setter = set_1_MicaBackdrop_Kind;
                 break;
+            case "DesktopHidden.Views.SubZoneView.ParentWindow":
+                userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("DesktopHidden.Views.SubZoneView");
+                xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "ParentWindow", "DesktopHidden.Views.SubZoneWindow");
+                xamlMember.Getter = get_2_SubZoneView_ParentWindow;
+                xamlMember.Setter = set_2_SubZoneView_ParentWindow;
+                break;
             case "DesktopHidden.Views.SubZoneView.SubZoneModel":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("DesktopHidden.Views.SubZoneView");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "SubZoneModel", "DesktopHidden.Models.SubZoneModel");
-                xamlMember.Getter = get_2_SubZoneView_SubZoneModel;
+                xamlMember.Getter = get_3_SubZoneView_SubZoneModel;
                 xamlMember.SetIsReadOnly();
                 break;
             case "DesktopHidden.Views.SubZoneWindow.SubZoneModel":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("DesktopHidden.Views.SubZoneWindow");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "SubZoneModel", "DesktopHidden.Models.SubZoneModel");
-                xamlMember.Getter = get_3_SubZoneWindow_SubZoneModel;
-                xamlMember.Setter = set_3_SubZoneWindow_SubZoneModel;
+                xamlMember.Getter = get_4_SubZoneWindow_SubZoneModel;
+                xamlMember.Setter = set_4_SubZoneWindow_SubZoneModel;
                 break;
             case "DesktopHidden.Views.SubZoneWindow.AppWindow":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("DesktopHidden.Views.SubZoneWindow");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "AppWindow", "Microsoft.UI.Windowing.AppWindow");
-                xamlMember.Getter = get_4_SubZoneWindow_AppWindow;
+                xamlMember.Getter = get_5_SubZoneWindow_AppWindow;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Children":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "Children", "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>");
-                xamlMember.Getter = get_5_TreeViewNode_Children;
+                xamlMember.Getter = get_6_TreeViewNode_Children;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Content":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "Content", "Object");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_6_TreeViewNode_Content;
-                xamlMember.Setter = set_6_TreeViewNode_Content;
+                xamlMember.Getter = get_7_TreeViewNode_Content;
+                xamlMember.Setter = set_7_TreeViewNode_Content;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Depth":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "Depth", "Int32");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_7_TreeViewNode_Depth;
+                xamlMember.Getter = get_8_TreeViewNode_Depth;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasChildren":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "HasChildren", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_8_TreeViewNode_HasChildren;
+                xamlMember.Getter = get_9_TreeViewNode_HasChildren;
                 xamlMember.SetIsReadOnly();
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.HasUnrealizedChildren":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "HasUnrealizedChildren", "Boolean");
-                xamlMember.Getter = get_9_TreeViewNode_HasUnrealizedChildren;
-                xamlMember.Setter = set_9_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Getter = get_10_TreeViewNode_HasUnrealizedChildren;
+                xamlMember.Setter = set_10_TreeViewNode_HasUnrealizedChildren;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.IsExpanded":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "IsExpanded", "Boolean");
                 xamlMember.SetIsDependencyProperty();
-                xamlMember.Getter = get_10_TreeViewNode_IsExpanded;
-                xamlMember.Setter = set_10_TreeViewNode_IsExpanded;
+                xamlMember.Getter = get_11_TreeViewNode_IsExpanded;
+                xamlMember.Setter = set_11_TreeViewNode_IsExpanded;
                 break;
             case "Microsoft.UI.Xaml.Controls.TreeViewNode.Parent":
                 userType = (global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType)GetXamlTypeByName("Microsoft.UI.Xaml.Controls.TreeViewNode");
                 xamlMember = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlMember(this, "Parent", "Microsoft.UI.Xaml.Controls.TreeViewNode");
-                xamlMember.Getter = get_11_TreeViewNode_Parent;
+                xamlMember.Getter = get_12_TreeViewNode_Parent;
                 xamlMember.SetIsReadOnly();
                 break;
             }

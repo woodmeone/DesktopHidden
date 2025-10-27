@@ -17,9 +17,12 @@ namespace DesktopHidden.Views
 {
     public sealed partial class SubZoneView : UserControl
     {
-        public SubZoneView()
+        public SubZoneWindow ParentWindow { get; set; } // 添加 SubZoneWindow 引用
+
+        public SubZoneView(SubZoneWindow parentWindow) // 修改构造函数
         {
             this.InitializeComponent();
+            ParentWindow = parentWindow;
         }
 
         public SubZoneModel SubZoneModel => DataContext as SubZoneModel;
@@ -61,45 +64,39 @@ namespace DesktopHidden.Views
         }
         */
 
-        private void DragResizeGrid_PointerPressed(object sender, PointerRoutedEventArgs e)
+        private void NavBar_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            if (SubZoneModel != null && SubZoneModel.IsLocked) return; // 锁定状态下不允许拖拽和调整大小
+            if (SubZoneModel != null && SubZoneModel.IsLocked) return; // 锁定状态下不允许拖拽
+            // 调用 SubZoneWindow 的拖拽方法
+            ParentWindow?.StartDragging(); // 使用 ParentWindow 属性
         }
 
-        private void DragResizeGrid_PointerMoved(object sender, PointerRoutedEventArgs e)
+        private void LockButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SubZoneModel != null && SubZoneModel.IsLocked) return; // 锁定状态下不允许拖拽和调整大小
-
-            if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse)
+            if (SubZoneModel != null)
             {
-                Windows.Foundation.Point mousePosition = e.GetCurrentPoint(DragResizeGrid).Position;
-                // ResizeDirection direction = GetResizeDirection(mousePosition);
-                // The logic for changing cursor should be in SubZoneWindow
+                SubZoneModel.IsLocked = !SubZoneModel.IsLocked; // 切换锁定状态
+                // TODO: 更新UI以反映锁定状态
             }
         }
 
-        private void DragResizeGrid_PointerReleased(object sender, PointerRoutedEventArgs e)
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            // PointerReleased 事件主要用于结束拖拽和调整大小状态，
-            // 由于我们使用系统级方法，这里不需要额外的逻辑来停止操作，
-            // 只需要确保鼠标光标恢复正常即可。
-            // CustomInputCursor.SetCursor(InputCursor.CreateFromCoreCursor(new CoreCursor(CoreCursorType.Arrow, 1)));
+            // TODO: 实现删除子区功能。这通常需要通知父级（如 MainWindow）来移除这个 SubZoneWindow。
         }
-    }
 
-    // 辅助类用于向上遍历Visual Tree查找特定类型的父级
-    /*
-    public static class VisualTreeExtensions
-    {
-        public static T FindParent<T>(DependencyObject child) where T : DependencyObject
+        private void ToggleContentButton_Click(object sender, RoutedEventArgs e)
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(child);
-            while (parent != null && !(parent is T))
+            if (SubZoneModel != null)
             {
-                parent = VisualTreeHelper.GetParent(parent);
+                SubZoneModel.IsContentVisible = !SubZoneModel.IsContentVisible; // 切换内容区域显示状态
+                ContentArea.Visibility = SubZoneModel.IsContentVisible ? Visibility.Visible : Visibility.Collapsed; // 更新UI
             }
-            return parent as T;
+        }
+
+        private void DisguiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // TODO: 实现伪装功能，这将打开一个抠图界面。
         }
     }
-    */
 }

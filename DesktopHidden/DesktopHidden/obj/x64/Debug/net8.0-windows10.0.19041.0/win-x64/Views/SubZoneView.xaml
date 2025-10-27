@@ -10,15 +10,59 @@
   d:DesignHeight="150"
   d:DesignWidth="200">
 
+  <UserControl.Resources>
+    <Style x:Key="SubZoneNavBarButton" TargetType="Button">
+      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Foreground" Value="White" />
+      <Setter Property="Width" Value="30" />
+      <Setter Property="Height" Value="30" />
+      <Setter Property="BorderThickness" Value="0" />
+      <Setter Property="Margin" Value="2,0" />
+      <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
+      <Setter Property="FontSize" Value="12" />
+    </Style>
+  </UserControl.Resources>
+
   <Border x:ConnectionId='2' x:Name="SubZoneBorder" CornerRadius="5" Background="{Binding BackgroundColor}"
     Opacity="{Binding Opacity}">
-    <Grid x:ConnectionId='3' x:Name="DragResizeGrid" Background="Transparent"
-                                                    
-                                                
-                                                      >
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="30" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
 
-      <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center"
-        Foreground="White" FontSize="20" />
+      <!-- 顶部导航栏 -->
+      <Grid x:ConnectionId='3' x:Name="NavBar" Grid.Row="0" Background="#33FFFFFF" HorizontalAlignment="Stretch"
+        VerticalAlignment="Top"
+                                              >
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <!-- 锁定按钮 -->
+          <Button x:ConnectionId='5' Style="{StaticResource SubZoneNavBarButton}"                         >
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="{Binding IsLocked, Converter={StaticResource BooleanToLockIconConverter}}" /> <!-- 锁定图标 -->
+          </Button>
+          
+          <!-- 删除按钮 -->
+          <Button x:ConnectionId='6' Style="{StaticResource SubZoneNavBarButton}"                           >
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE74D;" /> <!-- 删除图标 -->
+          </Button>
+
+          <!-- 下拉框按钮 (隐藏/显示内容) -->
+          <Button x:ConnectionId='7' Style="{StaticResource SubZoneNavBarButton}"                                  >
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE70D;" /> <!-- 下拉图标 -->
+          </Button>
+
+          <!-- 伪装按钮 -->
+          <Button x:ConnectionId='8' Style="{StaticResource SubZoneNavBarButton}"                             >
+            <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7B3;" /> <!-- 伪装图标 -->
+          </Button>
+        </StackPanel>
+      </Grid>
+
+      <!-- 内容区域 -->
+      <Grid x:ConnectionId='4' x:Name="ContentArea" Grid.Row="1" Background="Transparent">
+        <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center"
+          Foreground="White" FontSize="20" />
+      </Grid>
     </Grid>
   </Border>
 </UserControl>

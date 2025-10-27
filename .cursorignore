@@ -1,0 +1,38 @@
+# 忽略临时文件和常见构建输出
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+
+# 忽略 VS/VSCode 配置
+.vscode/
+.vs/
+
+# 忽略用户自定义的本地配置文件
+*.userprefs
+*.DS_Store
+Thumbs.db
+
+# 忽略外部依赖（如 NuGet 包还原输出）
+packages/
+*.nupkg
+
+# 忽略 publish 输出
+publish/
+out/
+dist/
+
+# 忽略Test运行产物
+TestResults/
+
+# 忽略Cursor自定义规则目录（如有时本地规则或生成）
+.cursorlocal/
+cursor-local/
+
+# 忽略MacOS系统文件
+._*
+
+# 可选：忽略包含敏感信息的配置（如.env，除非允许）
+# .env
