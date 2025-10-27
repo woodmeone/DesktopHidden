@@ -60,6 +60,13 @@ namespace DesktopHidden.SystemIntegration
         [DllImport("user32.dll")]
         internal static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool SetLayeredWindowAttributes(IntPtr hWnd, uint crKey, byte bAlpha, uint dwFlags);
+
+        // SetLayeredWindowAttributes flags
+        internal const uint LWA_ALPHA = 0x00000002; // 使用bAlpha来设置窗口的透明度
+        internal const uint LWA_COLORKEY = 0x00000001; // 使用crKey来设置透明色键
+
         // Dwm API
         [DllImport("dwmapi.dll")]
         internal static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
@@ -82,8 +89,11 @@ namespace DesktopHidden.SystemIntegration
         {
             // 设置窗口为无边框、无任务栏图标、透明、鼠标穿透和置顶
             uint exStyle = (uint)GetWindowLong(hWnd, GWL_EXSTYLE);
-            exStyle |= WS_EX_TOOLWINDOW | WS_EX_TRANSPARENT; // Add WS_EX_TOOLWINDOW to remove from taskbar, WS_EX_TRANSPARENT for mouse pass-through
+            exStyle |= WS_EX_TOOLWINDOW | WS_EX_LAYERED; // 移除 WS_EX_TRANSPARENT，只保留 WS_EX_TOOLWINDOW 和 WS_EX_LAYERED
             SetWindowLong(hWnd, GWL_EXSTYLE, (int)exStyle);
+
+            // 设置窗口的整体透明度为 45% (115/255)
+            SetLayeredWindowAttributes(hWnd, 0, 115, LWA_ALPHA); // 设置 Alpha 值
 
             // Make the window topmost
             SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);

@@ -98,7 +98,11 @@ namespace DesktopHidden.Views
 
         private void DisguiseButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: 实现伪装功能，这将打开一个抠图界面。
+            // 创建并显示抠图界面
+            var disguiseWindow = new Window();
+            disguiseWindow.Title = "伪装抠图";
+            disguiseWindow.Content = new DisguiseEditorView();
+            disguiseWindow.Activate();
         }
     }
 }

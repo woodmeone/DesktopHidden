@@ -1,6 +1,7 @@
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\DesktopHidden.exe
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\App.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MainWindow.xbf
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\DisguiseEditorView.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneView.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneWindow.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\DesktopHidden.deps.json
@@ -234,6 +235,8 @@ D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-window
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\App.g.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MainWindow.g.i.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MainWindow.g.cs
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\DisguiseEditorView.g.i.cs
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\DisguiseEditorView.g.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneView.g.i.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneView.g.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneWindow.g.i.cs
@@ -241,10 +244,12 @@ D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-window
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\XamlTypeInfo.g.cs
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\App.xaml
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MainWindow.xaml
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\DisguiseEditorView.xaml
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneView.xaml
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneWindow.xaml
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\App.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MainWindow.xbf
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\DisguiseEditorView.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneView.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\Views\SubZoneWindow.xbf
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\XamlSaveStateFile.xml

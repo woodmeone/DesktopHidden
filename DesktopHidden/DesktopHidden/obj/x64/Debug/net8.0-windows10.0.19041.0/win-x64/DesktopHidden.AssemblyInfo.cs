@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DesktopHidden")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9b4a33bb0952149d4be8f3268192b2f0fe9b80f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7f931e484675025c6d3deb7384a240ab46a088fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("DesktopHidden")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DesktopHidden")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

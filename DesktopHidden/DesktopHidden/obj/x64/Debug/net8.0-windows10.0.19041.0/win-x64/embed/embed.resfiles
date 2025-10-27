@@ -1,4 +1,5 @@
 App.xbf
 MainWindow.xbf
+Views\DisguiseEditorView.xbf
 Views\SubZoneView.xbf
 Views\SubZoneWindow.xbf
