@@ -92,7 +92,7 @@ namespace DesktopHidden.Views
             if (SubZoneModel != null)
             {
                 SubZoneModel.IsContentVisible = !SubZoneModel.IsContentVisible; // 切换内容区域显示状态
-                ContentArea.Visibility = SubZoneModel.IsContentVisible ? Visibility.Visible : Visibility.Collapsed; // 更新UI
+                // ContentArea.Visibility = SubZoneModel.IsContentVisible ? Visibility.Visible : Visibility.Collapsed; // 更新UI，通过GridLength Converter处理
             }
         }
 

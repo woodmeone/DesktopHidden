@@ -127,5 +127,19 @@ namespace DesktopHidden.SystemIntegration
             };
             DwmExtendFrameIntoClientArea(hWnd, ref margins);
         }
+
+        // 获取桌面壁纸路径
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SystemParametersInfo(uint uiAction, uint uiParam, System.Text.StringBuilder pvParam, uint fWinIni);
+
+        private const uint SPI_GETDESKWALLPAPER = 0x0073;
+        private const uint MAX_PATH = 260;
+
+        public static string GetDesktopWallpaperPath()
+        {
+            System.Text.StringBuilder wallpaperPath = new System.Text.StringBuilder((int)MAX_PATH);
+            SystemParametersInfo(SPI_GETDESKWALLPAPER, MAX_PATH, wallpaperPath, 0);
+            return wallpaperPath.ToString();
+        }
     }
 }

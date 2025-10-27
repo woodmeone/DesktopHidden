@@ -14,6 +14,7 @@
   <UserControl.Resources>
     <converters:BooleanToLockIconConverter x:Key="BooleanToLockIconConverter" />
     <converters:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
+    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <Style x:Key="SubZoneNavBarButton" TargetType="Button">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="White" />
@@ -37,7 +38,7 @@
       </Grid.RowDefinitions>
 
       <!-- 顶部导航栏 -->
-      <Grid x:Name="NavBar" Grid.Row="0" Background="#33FFFFFF" HorizontalAlignment="Stretch"
+      <Grid x:Name="NavBar" Grid.Row="0" Background="#99FFFFFF" HorizontalAlignment="Stretch"
         VerticalAlignment="Top"
         PointerPressed="NavBar_PointerPressed">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -69,7 +70,8 @@
       </Grid>
 
       <!-- 内容区域 -->
-      <Grid x:Name="ContentArea" Grid.Row="1" Background="Transparent">
+      <Grid x:Name="ContentArea" Grid.Row="1" Background="Transparent"
+        Visibility="{Binding IsContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
         <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center"
           Foreground="White" FontSize="20" />
       </Grid>

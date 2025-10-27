@@ -32,6 +32,7 @@ namespace DesktopHidden.Views
             SubZoneUserControl.DataContext = SubZoneModel;
             this.Content = SubZoneUserControl; // 设置窗口内容为 SubZoneView
             SubZoneUserControl.PointerPressed += SubZoneUserControl_PointerPressed; // 订阅 PointerPressed 事件
+            SubZoneModel.PropertyChanged += SubZoneModel_PropertyChanged; // 订阅 SubZoneModel 的 PropertyChanged 事件
 
             // 获取窗口句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
@@ -43,6 +44,8 @@ namespace DesktopHidden.Views
                 _appWindow.MoveAndResize(new RectInt32((int)SubZoneModel.Position.X, (int)SubZoneModel.Position.Y, (int)SubZoneModel.Size.Width, (int)SubZoneModel.Size.Height));
                 (_appWindow.Presenter as OverlappedPresenter).IsResizable = true; // 允许调整大小
                 // _appWindow.IsShownInSwitchers = false; // 不在Alt+Tab中显示，如果需要
+                _appWindow.TitleBar.BackgroundColor = Colors.Transparent; // 设置标题栏背景为透明
+                _appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent; // 设置标题栏按钮背景为透明
             }
 
             // 应用系统集成特性
@@ -77,7 +80,28 @@ namespace DesktopHidden.Views
             if (args.DidPositionChange || args.DidSizeChange)
             {
                 SubZoneModel.Position = new Windows.Foundation.Point(sender.Position.X, sender.Position.Y);
-                SubZoneModel.Size = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height);
+                SubZoneModel.Size = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height); // 更新当前尺寸
+                if (args.DidSizeChange && SubZoneModel.IsContentVisible) // 如果大小改变且内容可见，才更新 OriginalSize
+                {
+                    SubZoneModel.OriginalSize = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height);
+                }
+            }
+        }
+
+        private void SubZoneModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SubZoneModel.IsContentVisible))
+            {
+                AdjustWindowHeight();
+            }
+        }
+
+        private void AdjustWindowHeight()
+        {
+            if (_appWindow != null && SubZoneModel != null)
+            {
+                int newHeight = SubZoneModel.IsContentVisible ? (int)SubZoneModel.OriginalSize.Height : 60; // 使用 OriginalSize.Height
+                _appWindow.Resize(new Windows.Graphics.SizeInt32((int)SubZoneModel.Size.Width, newHeight));
             }
         }
 
