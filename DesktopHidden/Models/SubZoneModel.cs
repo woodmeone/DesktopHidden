@@ -4,6 +4,8 @@ using Windows.Foundation;
 using Windows.UI;
 using System.ComponentModel; // 添加这个命名空间
 using System.Runtime.CompilerServices; // 添加这个命名空间
+using Microsoft.UI; // 将 Microsoft.UI.Xaml.Media 替换为 Microsoft.UI
+using Microsoft.UI.Xaml.Media; // 添加这个命名空间
 
 namespace DesktopHidden.Models
 {
@@ -19,11 +21,23 @@ namespace DesktopHidden.Models
 
         public Guid Id { get; set; } = Guid.NewGuid();
         public Point Position { get; set; }
-        public Size Size { get; set; }
-        // 子区背景颜色，默认是45%透明度的黑色。例如：Color.FromArgb(115, 0, 0, 0) 表示透明度为115（约45%），RGB为0,0,0（黑色）。
-        public Color BackgroundColor { get; set; } = Color.FromArgb(115, 0, 0, 0);
+        public Size Size { get; set; } // 子区当前显示的尺寸
+        public Size OriginalSize { get; set; } // 子区原始的完整尺寸，用于恢复内容区域可见时的尺寸
+        private SolidColorBrush _backgroundColor = new SolidColorBrush(Colors.Black); // 子区背景颜色，默认是黑色。
+        public SolidColorBrush BackgroundColor
+        {
+            get => _backgroundColor;
+            set
+            {
+                if (_backgroundColor != value)
+                {
+                    _backgroundColor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         // 子区整体不透明度，默认为1.0（完全不透明）。由于背景颜色已包含透明度，这里设置为1.0以避免双重透明。
-        public double Opacity { get; set; } = 1.0;
+        public double Opacity { get; set; } = 0.45; // 子区整体不透明度，默认为0.45（45%透明）。
 
         private bool _isLocked;
         // 子区是否被锁定，锁定后不能移动或改变大小。
@@ -66,7 +80,8 @@ namespace DesktopHidden.Models
         public SubZoneModel(Point position, Size size)
         {
             Position = position;
-            Size = size;
+            Size = size; // 初始时，当前尺寸和原始尺寸相同
+            OriginalSize = size;
             _isContentVisible = true; // 确保默认值被设置并通过属性通知
         }
     }

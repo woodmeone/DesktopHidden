@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\Project\\DesktopHidden\\DesktopHidden\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|d:\\project\\desktophidden\\desktophidden\\desktophidden\\views\\subzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|solutionrelative:desktophidden\\views\\subzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|d:\\project\\desktophidden\\desktophidden\\desktophidden\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|solutionrelative:desktophidden\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
@@ -27,27 +23,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SubZoneView.xaml.cs",
-              "DocumentMoniker": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\Views\\SubZoneView.xaml.cs",
-              "RelativeDocumentMoniker": "DesktopHidden\\Views\\SubZoneView.xaml.cs",
-              "ToolTip": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\Views\\SubZoneView.xaml.cs",
-              "RelativeToolTip": "DesktopHidden\\Views\\SubZoneView.xaml.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAgwC8AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-25T12:39:59.312Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\App.xaml",
               "RelativeDocumentMoniker": "DesktopHidden\\App.xaml",
               "ToolTip": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\App.xaml",
               "RelativeToolTip": "DesktopHidden\\App.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAOAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAoAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-25T11:47:09.639Z"
+              "WhenOpened": "2025-10-27T08:23:51.365Z",
+              "EditorCaption": ""
             }
           ]
         }

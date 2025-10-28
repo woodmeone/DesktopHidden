@@ -16,14 +16,14 @@
     <converters:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <Style x:Key="SubZoneNavBarButton" TargetType="Button">
-      <Setter Property="Background" Value="Transparent" />
+      <Setter Property="Background" Value="#1AFFFFFF" /> <!-- 更改为半透明背景，确保可点击 -->
       <Setter Property="Foreground" Value="White" />
-      <Setter Property="Width" Value="30" />
-      <Setter Property="Height" Value="30" />
+      <Setter Property="Width" Value="60" />
+      <Setter Property="Height" Value="60" />
       <Setter Property="BorderThickness" Value="0" />
       <Setter Property="Margin" Value="2,0" />
       <Setter Property="FontFamily" Value="Segoe Fluent Icons" />
-      <Setter Property="FontSize" Value="12" />
+      <Setter Property="FontSize" Value="24" />
     </Style>
   </UserControl.Resources>
 
