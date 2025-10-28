@@ -116,7 +116,8 @@ namespace DesktopHidden
                         {
                             Path = s.Path,
                             Name = s.Name,
-                            OriginalPath = s.OriginalPath
+                            OriginalPath = s.OriginalPath,
+                            HiddenStoragePath = s.HiddenStoragePath // 保存隐藏存储路径
                         }).ToList()
                     };
                     serializableSubZones.Add(serializableSubZone);
@@ -170,13 +171,14 @@ namespace DesktopHidden
                                 Path = serializableShortcut.Path,
                                 Name = serializableShortcut.Name,
                                 OriginalPath = (string?)serializableShortcut.OriginalPath,
-                                Icon = await SubZoneView.GetAppIcon(serializableShortcut.Path) // 重新获取图标
+                                HiddenStoragePath = (string?)serializableShortcut.HiddenStoragePath, // 从序列化数据中加载 HiddenStoragePath
+                                Icon = await SubZoneView.GetAppIcon(serializableShortcut.Path) // 重新获取图标时使用实际程序路径
                             };
                             newSubZone.Shortcuts.Add(shortcut);
                             // 如果原始快捷方式被隐藏，则将其路径添加到全局隐藏列表中
                             if (!string.IsNullOrEmpty(shortcut.OriginalPath))
                             {
-                                App.HiddenShortcutOriginalPaths.Add(shortcut.OriginalPath);
+                                App.HiddenShortcutMappings.Add(new Tuple<string, string>(shortcut.OriginalPath, shortcut.Path)); // 将原始路径和隐藏路径添加到映射中
                             }
                         }
                         _subZoneManager.SubZones.Add(newSubZone);

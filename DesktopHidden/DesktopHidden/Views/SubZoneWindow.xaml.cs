@@ -11,6 +11,7 @@ using WinRT.Interop;
 using System.Runtime.InteropServices; // Added for DllImport
 using Windows.UI.Core; // Add this for CoreCursorType
 using System.Diagnostics; // 用于Debug.WriteLine
+using System.Linq; // Added for FirstOrDefault
 
 namespace DesktopHidden.Views
 {
@@ -108,6 +109,27 @@ namespace DesktopHidden.Views
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
             SetWindowLongPtr(hWnd, GWLP_WNDPROC, oldWndProc);
             newWndProc = null; // 释放对委托的引用
+
+            // 在窗口关闭时，恢复所有被隐藏的快捷方式
+            if (SubZoneModel != null)
+            {
+                System.Diagnostics.Debug.WriteLine($"SubZoneWindow_Closed: Restoring shortcuts for SubZone {SubZoneModel.Id}");
+                foreach (var shortcut in SubZoneModel.Shortcuts)
+                {
+                    if (!string.IsNullOrEmpty(shortcut.OriginalPath) && !string.IsNullOrEmpty(shortcut.HiddenStoragePath))
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Attempting to show desktop item from SubZoneWindow_Closed: {shortcut.OriginalPath} from {shortcut.HiddenStoragePath}");
+                        Win32WindowUtility.ShowDesktopItem(shortcut.HiddenStoragePath, shortcut.OriginalPath);
+                        // 从全局隐藏列表中移除
+                        var mappingToRemove = App.HiddenShortcutMappings.FirstOrDefault(m => m.Item1 == shortcut.OriginalPath);
+                        if (mappingToRemove != null)
+                        {
+                            App.HiddenShortcutMappings.Remove(mappingToRemove);
+                            System.Diagnostics.Debug.WriteLine($"Removed {shortcut.OriginalPath} from global hidden mappings (SubZoneWindow_Closed). Remaining count: {App.HiddenShortcutMappings.Count}");
+                        }
+                    }
+                }
+            }
         }
 
         private IntPtr NewWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
@@ -131,7 +153,10 @@ namespace DesktopHidden.Views
             if (SubZoneModel != null)
             {
                 RequestClose?.Invoke(this, SubZoneModel.Id);
+                System.Diagnostics.Debug.WriteLine($"RequestClose event invoked for SubZone {SubZoneModel.Id}");
             }
+            this.Close(); // 强制关闭窗口，防止阻塞
+            System.Diagnostics.Debug.WriteLine($"SubZoneWindow {SubZoneModel?.Id} requested to close.");
         }
 
         // 设置窗口是否可调整大小的方法

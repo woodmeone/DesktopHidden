@@ -25,5 +25,6 @@ namespace DesktopHidden.Models
         public required string Path { get; set; }
         public required string Name { get; set; }
         public required string? OriginalPath { get; set; } // 可以为null
+        public required string? HiddenStoragePath { get; set; } // 添加此行，用于隐藏存储中的路径
     }
 }

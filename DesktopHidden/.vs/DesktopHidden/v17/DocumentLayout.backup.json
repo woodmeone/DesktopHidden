@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Project\\DesktopHidden\\DesktopHidden\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|d:\\project\\desktophidden\\desktophidden\\desktophidden\\views\\subzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3A1BB7CA-DF0A-4B54-9571-EA631B30D56F}|DesktopHidden\\DesktopHidden.csproj|solutionrelative:desktophidden\\views\\subzoneview.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,19 +31,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "App.g.i.cs",
+              "DocumentMoniker": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs",
+              "RelativeDocumentMoniker": "DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs",
+              "ToolTip": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs",
+              "RelativeToolTip": "DesktopHidden\\obj\\x64\\Debug\\net8.0-windows10.0.19041.0\\win-x64\\App.g.i.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAA7wCMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-28T09:05:00.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "SubZoneView.xaml.cs",
               "DocumentMoniker": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\Views\\SubZoneView.xaml.cs",
               "RelativeDocumentMoniker": "DesktopHidden\\Views\\SubZoneView.xaml.cs",
               "ToolTip": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\Views\\SubZoneView.xaml.cs",
               "RelativeToolTip": "DesktopHidden\\Views\\SubZoneView.xaml.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwCIAAABSAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAYwC4AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-25T12:39:59.312Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "App.xaml",
               "DocumentMoniker": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\App.xaml",
               "RelativeDocumentMoniker": "DesktopHidden\\App.xaml",

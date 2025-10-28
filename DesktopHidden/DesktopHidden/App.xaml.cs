@@ -34,8 +34,8 @@ namespace DesktopHidden
 
         public static List<Window> Windows { get; } = new List<Window>();
 
-        // 存储所有被隐藏的原始快捷方式路径
-        public static ObservableCollection<string> HiddenShortcutOriginalPaths { get; } = new ObservableCollection<string>();
+        // 存储所有被隐藏的原始快捷方式路径和其在隐藏存储中的路径
+        public static ObservableCollection<Tuple<string, string>> HiddenShortcutMappings { get; } = new ObservableCollection<Tuple<string, string>>();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -106,15 +106,25 @@ namespace DesktopHidden
         /// </summary>
         public static void RestoreHiddenShortcuts()
         {
-            foreach (var path in HiddenShortcutOriginalPaths)
+            System.Diagnostics.Debug.WriteLine($"RestoreHiddenShortcuts triggered. Count: {HiddenShortcutMappings.Count}");
+            foreach (var mapping in HiddenShortcutMappings)
             {
-                if (File.Exists(path))
+                string originalPath = mapping.Item1;
+                string hiddenPath = mapping.Item2;
+
+                if (System.IO.File.Exists(hiddenPath)) // 检查隐藏文件是否存在
                 {
-                    Win32WindowUtility.ShowFile(path);
-                    System.Diagnostics.Debug.WriteLine($"Restored hidden shortcut: {path}");
+                    System.Diagnostics.Debug.WriteLine($"Attempting to show original shortcut from RestoreHiddenShortcuts: {originalPath} from {hiddenPath}");
+                    Win32WindowUtility.ShowDesktopItem(hiddenPath, originalPath);
+                    System.Diagnostics.Debug.WriteLine($"Restored hidden shortcut: {originalPath}");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Warning: Hidden item not found for restoration: {hiddenPath}");
                 }
             }
-            HiddenShortcutOriginalPaths.Clear(); // 清空列表
+            HiddenShortcutMappings.Clear(); // 清空列表
+            System.Diagnostics.Debug.WriteLine("HiddenShortcutMappings cleared.");
         }
     }
 }

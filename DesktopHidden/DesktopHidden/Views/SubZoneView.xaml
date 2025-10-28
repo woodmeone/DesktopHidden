@@ -15,6 +15,7 @@
     <converters:BooleanToLockIconConverter x:Key="BooleanToLockIconConverter" />
     <converters:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     <Style x:Key="SubZoneNavBarButton" TargetType="Button">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="White" />
@@ -27,7 +28,8 @@
     </Style>
   </UserControl.Resources>
 
-  <Border x:Name="SubZoneBorder" CornerRadius="5" Background="{Binding BackgroundColor}"
+  <Border x:Name="SubZoneBorder" CornerRadius="5"
+    Background="{Binding BackgroundColor, Converter={StaticResource ColorToBrushConverter}}"
     Opacity="{Binding Opacity}">
     <!-- Fallback Background for design time or if binding fails -->
     <Grid>
@@ -86,9 +88,25 @@
           </ItemsControl.ItemsPanel>
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <StackPanel Orientation="Vertical" Margin="5" Width="60" Height="80"
-                DoubleTapped="ShortcutItem_DoubleTapped">
-                <Image Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Center" />
+              <StackPanel x:Name="ShortcutStackPanel" Orientation="Vertical" Margin="5" Width="60" Height="80"
+                DoubleTapped="ShortcutItem_DoubleTapped"
+                PointerPressed="ShortcutItem_PointerPressed"
+                PointerMoved="ShortcutItem_PointerMoved"
+                PointerReleased="ShortcutItem_PointerReleased">
+                <Grid>
+                  <Image Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+                  <!-- 删除按钮 -->
+                  <Button x:Name="DeleteShortcutButton" Content="&#xE74D;" FontFamily="Segoe Fluent Icons"
+                    FontSize="12" Foreground="White" Background="#CCFF0000" HorizontalAlignment="Right"
+                    VerticalAlignment="Top" Width="16" Height="16" Padding="0"
+                    Style="{StaticResource SubZoneNavBarButton}"
+                    Visibility="Collapsed" Click="ShortcutDeleteButton_Click">
+                    <Button.Resources>
+                      <Style TargetType="Button" BasedOn="{StaticResource SubZoneNavBarButton}" />
+                    </Button.Resources>
+                  </Button>
+                </Grid>
                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="Center"
                   Foreground="White" FontSize="10" Margin="0,5,0,0" MaxLines="2" />
               </StackPanel>

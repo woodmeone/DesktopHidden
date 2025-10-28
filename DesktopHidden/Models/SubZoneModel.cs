@@ -5,6 +5,8 @@ using Windows.UI;
 using System.ComponentModel; // 添加这个命名空间
 using System.Runtime.CompilerServices; // 添加这个命名空间
 using System.Collections.ObjectModel; // 添加这个命名空间
+using DesktopHidden.SystemIntegration; // 添加此行
+using System.Linq; // 添加此行，用于 FirstOrDefault
 
 namespace DesktopHidden.Models
 {
@@ -59,6 +61,31 @@ namespace DesktopHidden.Models
         }
 
         public ObservableCollection<ShortcutModel> Shortcuts { get; set; } = new ObservableCollection<ShortcutModel>();
+
+        /// <summary>
+        /// 从子区中移除快捷方式，并在必要时显示原始桌面快捷方式。
+        /// </summary>
+        /// <param name="shortcut">要移除的快捷方式模型。</param>
+        public void RemoveShortcut(ShortcutModel shortcut)
+        {
+            if (Shortcuts.Remove(shortcut))
+            {
+                System.Diagnostics.Debug.WriteLine($"Removed shortcut from SubZone: {shortcut.Name}. OriginalPath: {shortcut.OriginalPath}, HiddenStoragePath: {shortcut.HiddenStoragePath}");
+                // 如果快捷方式有原始路径和隐藏路径，则显示原始文件
+                if (!string.IsNullOrEmpty(shortcut.OriginalPath) && !string.IsNullOrEmpty(shortcut.HiddenStoragePath))
+                {
+                    System.Diagnostics.Debug.WriteLine($"Attempting to show desktop item from RemoveShortcut: {shortcut.OriginalPath} from {shortcut.HiddenStoragePath}");
+                    Win32WindowUtility.ShowDesktopItem(shortcut.HiddenStoragePath, shortcut.OriginalPath);
+                    // 从全局隐藏映射列表中移除
+                    var mappingToRemove = App.HiddenShortcutMappings.FirstOrDefault(m => m.Item1 == shortcut.OriginalPath);
+                    if (mappingToRemove != null)
+                    {
+                        App.HiddenShortcutMappings.Remove(mappingToRemove);
+                        System.Diagnostics.Debug.WriteLine($"Removed {shortcut.OriginalPath} from global hidden mappings. Remaining count: {App.HiddenShortcutMappings.Count}");
+                    }
+                }
+            }
+        }
 
         public SubZoneModel()
         {

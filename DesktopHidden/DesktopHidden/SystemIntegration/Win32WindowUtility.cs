@@ -3,11 +3,27 @@ using System.Runtime.InteropServices;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using System.IO; // Added for File.GetAttributes
+using Windows.Storage; // 添加此行，用于获取应用数据文件夹
 
 namespace DesktopHidden.SystemIntegration
 {
     public static class Win32WindowUtility
     {
+        private static string _hiddenStoragePath = string.Empty; // 隐藏文件存储目录路径
+
+        static Win32WindowUtility()
+        {
+            // 在静态构造函数中初始化隐藏文件存储目录
+            string localAppData = ApplicationData.Current.LocalFolder.Path;
+            _hiddenStoragePath = Path.Combine(localAppData, "DesktopHiddenItems");
+
+            if (!Directory.Exists(_hiddenStoragePath))
+            {
+                Directory.CreateDirectory(_hiddenStoragePath);
+            }
+            System.Diagnostics.Debug.WriteLine($"隐藏文件存储目录: {_hiddenStoragePath}");
+        }
+
         [DllImport("user32.dll", SetLastError = true)]
         internal static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
@@ -157,6 +173,28 @@ namespace DesktopHidden.SystemIntegration
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool SetFileAttributes(string lpFileName, FileAttributes dwFileAttributes);
 
+        // SHChangeNotify 函数和相关常量
+        [DllImport("shell32.dll")]
+        public static extern void SHChangeNotify(uint wEventId, uint uFlags, IntPtr dwItem1, IntPtr dwItem2);
+
+        // SHChangeNotify 事件 ID
+        public const uint SHCNE_ASSOCCHANGED = 0x08000000; // 系统文件关联改变
+        public const uint SHCNE_ALLEVENTS = 0x7FFFFFFF; // 所有事件
+        public const uint SHCNE_ATTRIBUTES = 0x00000008; // 属性改变 (我们主要用这个)
+        public const uint SHCNE_CREATE = 0x00000002; // 创建
+        public const uint SHCNE_DELETE = 0x00000004; // 删除
+        public const uint SHCNE_UPDATEITEM = 0x00000001; // 更新项目
+
+        // SHChangeNotify 标志
+        public const uint SHCNF_IDLIST = 0x0000; // dwItem1 和 dwItem2 是 PIDLs
+        public const uint SHCNF_PATHA = 0x0001; // dwItem1 和 dwItem2 是字符串路径 (ANSI)
+        public const uint SHCNF_PATHW = 0x0002; // dwItem1 和 dwItem2 是字符串路径 (Unicode)
+        public const uint SHCNF_PRINTER = 0x0003; // dwItem1 和 dwItem2 是打印机名称
+        public const uint SHCNF_DWORD = 0x0003; // dwItem1 是 DWORD
+        public const uint SHCNF_FLUSH = 0x1000; // 同步刷新
+        public const uint SHCNF_FLUSHNOWAIT = 0x2000; // 异步刷新
+
+
         [Flags]
         public enum FileAttributes : uint
         {
@@ -177,18 +215,101 @@ namespace DesktopHidden.SystemIntegration
             FILE_ATTRIBUTE_VIRTUAL = 0x00010000
         }
 
-        public static void HideFile(string filePath)
+        /// <summary>
+        /// 将桌面项目移动到隐藏存储目录。
+        /// </summary>
+        /// <param name="originalDesktopPath">桌面项目的原始路径。</param>
+        /// <returns>移动后在隐藏存储中的新路径，如果移动失败则返回空。</returns>
+        public static string? MoveDesktopItemToHiddenStorage(string originalDesktopPath)
         {
-            SetFileAttributes(filePath, FileAttributes.FILE_ATTRIBUTE_HIDDEN);
+            if (!File.Exists(originalDesktopPath) && !Directory.Exists(originalDesktopPath))
+            {
+                System.Diagnostics.Debug.WriteLine($"MoveDesktopItemToHiddenStorage: Original item not found at {originalDesktopPath}");
+                return null;
+            }
+
+            try
+            {
+                string fileName = Path.GetFileName(originalDesktopPath);
+                string destinationPathInHiddenStorage = Path.Combine(_hiddenStoragePath, fileName);
+
+                // 如果目标文件已存在，则删除它（简化处理，实际应用中可能需要更复杂的冲突解决）
+                if (File.Exists(destinationPathInHiddenStorage)) File.Delete(destinationPathInHiddenStorage);
+                else if (Directory.Exists(destinationPathInHiddenStorage)) Directory.Delete(destinationPathInHiddenStorage, true);
+
+                File.Move(originalDesktopPath, destinationPathInHiddenStorage);
+                System.Diagnostics.Debug.WriteLine($"Moved '{originalDesktopPath}' to hidden storage: '{destinationPathInHiddenStorage}'");
+
+                // 通知 Shell 刷新原始目录（桌面）
+                SHChangeNotify(SHCNE_DELETE, SHCNF_PATHW, Marshal.StringToCoTaskMemUni(originalDesktopPath), IntPtr.Zero);
+                return destinationPathInHiddenStorage;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error moving '{originalDesktopPath}' to hidden storage: {ex.Message}");
+                return null;
+            }
         }
 
-        public static void ShowFile(string filePath)
+        /// <summary>
+        /// 将隐藏存储中的项目恢复到其原始桌面位置。
+        /// </summary>
+        /// <param name="hiddenPathInStorage">隐藏存储中的项目路径。</param>
+        /// <param name="originalDesktopPath">项目在桌面上的原始路径。</param>
+        public static void RestoreDesktopItemFromHiddenStorage(string hiddenPathInStorage, string originalDesktopPath)
         {
-            // 获取当前文件属性
-            FileAttributes attributes = (FileAttributes)File.GetAttributes(filePath);
-            // 移除隐藏属性
-            attributes &= ~FileAttributes.FILE_ATTRIBUTE_HIDDEN;
-            SetFileAttributes(filePath, attributes);
+            if (!File.Exists(hiddenPathInStorage) && !Directory.Exists(hiddenPathInStorage))
+            {
+                System.Diagnostics.Debug.WriteLine($"RestoreDesktopItemFromHiddenStorage: Hidden item not found at {hiddenPathInStorage}");
+                return;
+            }
+
+            try
+            {
+                // 如果桌面已存在同名文件，先删除 (简化处理)
+                if (File.Exists(originalDesktopPath)) File.Delete(originalDesktopPath);
+                else if (Directory.Exists(originalDesktopPath)) Directory.Delete(originalDesktopPath, true);
+
+                File.Move(hiddenPathInStorage, originalDesktopPath);
+                System.Diagnostics.Debug.WriteLine($"Restored '{hiddenPathInStorage}' to desktop: '{originalDesktopPath}'");
+
+                // 通知 Shell 刷新原始桌面目录
+                SHChangeNotify(SHCNE_CREATE, SHCNF_PATHW, Marshal.StringToCoTaskMemUni(originalDesktopPath), IntPtr.Zero);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error restoring '{hiddenPathInStorage}' to '{originalDesktopPath}': {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 隐藏桌面上的一个项目，将其移动到隐藏存储。
+        /// </summary>
+        /// <param name="originalDesktopPath">桌面项目的原始路径。</param>
+        /// <returns>移动后在隐藏存储中的新路径，如果隐藏失败则返回空。</returns>
+        public static string? HideDesktopItem(string originalDesktopPath)
+        {
+            return MoveDesktopItemToHiddenStorage(originalDesktopPath);
+        }
+
+        /// <summary>
+        /// 隐藏文件，将其移动到隐藏存储。
+        /// </summary>
+        /// <param name="originalFilePath">文件的原始路径。</param>
+        /// <returns>移动后在隐藏存储中的新路径，如果隐藏失败则返回空。</returns>
+        public static string? HideFile(string originalFilePath)
+        {
+            return MoveDesktopItemToHiddenStorage(originalFilePath);
+        }
+
+        /// <summary>
+        /// 显示一个之前隐藏的桌面项目，将其从隐藏存储移回桌面。
+        /// </summary>
+        /// <param name="hiddenPathInStorage">隐藏存储中的项目路径。</param>
+        /// <param name="originalDesktopPath">项目在桌面上的原始路径。</param>
+        public static void ShowDesktopItem(string hiddenPathInStorage, string originalDesktopPath)
+        {
+            RestoreDesktopItemFromHiddenStorage(hiddenPathInStorage, originalDesktopPath);
         }
     }
 }

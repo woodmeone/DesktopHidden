@@ -26,11 +26,18 @@ namespace DesktopHidden.Models
             set => SetProperty(ref _icon, value);
         }
 
-        private string? _originalPath; // 添加原始快捷方式路径，用于隐藏和恢复，可以为null
+        private string? _originalPath; // 原始桌面路径
         public string? OriginalPath
         {
             get => _originalPath;
             set => SetProperty(ref _originalPath, value);
+        }
+
+        private string? _hiddenStoragePath; // 隐藏存储中的路径
+        public string? HiddenStoragePath
+        {
+            get => _hiddenStoragePath;
+            set => SetProperty(ref _hiddenStoragePath, value);
         }
 
         public ShortcutModel()
@@ -39,6 +46,7 @@ namespace DesktopHidden.Models
             _name = string.Empty; // 初始化
             _icon = new BitmapImage(); // 初始化
             _originalPath = null; // 可以为null
+            _hiddenStoragePath = null; // 初始化
         }
     }
 }

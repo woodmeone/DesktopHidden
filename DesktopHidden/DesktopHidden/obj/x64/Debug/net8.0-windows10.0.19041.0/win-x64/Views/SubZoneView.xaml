@@ -15,6 +15,7 @@
     <converters:BooleanToLockIconConverter x:Key="BooleanToLockIconConverter" />
     <converters:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
     <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     <Style x:Key="SubZoneNavBarButton" TargetType="Button">
       <Setter Property="Background" Value="Transparent" />
       <Setter Property="Foreground" Value="White" />
@@ -27,7 +28,8 @@
     </Style>
   </UserControl.Resources>
 
-  <Border x:ConnectionId='2' x:Name="SubZoneBorder" CornerRadius="5" Background="{Binding BackgroundColor}"
+  <Border x:ConnectionId='2' x:Name="SubZoneBorder" CornerRadius="5"
+    Background="{Binding BackgroundColor, Converter={StaticResource ColorToBrushConverter}}"
     Opacity="{Binding Opacity}">
     <!-- Fallback Background for design time or if binding fails -->
     <Grid>
@@ -43,26 +45,26 @@
                                               >
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
           <!-- 锁定按钮 -->
-          <Button x:ConnectionId='7' Style="{StaticResource SubZoneNavBarButton}"                         >
+          <Button x:ConnectionId='8' Style="{StaticResource SubZoneNavBarButton}"                         >
             <FontIcon FontFamily="Segoe Fluent Icons"
               Glyph="{Binding IsLocked, Converter={StaticResource BooleanToLockIconConverter}}"
               Foreground="White" /> <!-- 明确设置前景颜色 -->
           </Button>
 
           <!-- 删除按钮 -->
-          <Button x:ConnectionId='8' Style="{StaticResource SubZoneNavBarButton}"                           >
+          <Button x:ConnectionId='9' Style="{StaticResource SubZoneNavBarButton}"                           >
             <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE74D;" Foreground="White" /> <!--
             明确设置前景颜色 -->
           </Button>
 
           <!-- 下拉框按钮 (隐藏/显示内容) -->
-          <Button x:ConnectionId='9' Style="{StaticResource SubZoneNavBarButton}"                                  >
+          <Button x:ConnectionId='10' Style="{StaticResource SubZoneNavBarButton}"                                  >
             <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE70D;" Foreground="White" /> <!--
             明确设置前景颜色 -->
           </Button>
 
           <!-- 伪装按钮 -->
-          <Button x:ConnectionId='10' Style="{StaticResource SubZoneNavBarButton}"                             >
+          <Button x:ConnectionId='11' Style="{StaticResource SubZoneNavBarButton}"                             >
             <FontIcon FontFamily="Segoe Fluent Icons" Glyph="&#xE7B3;" Foreground="White" /> <!--
             明确设置前景颜色 -->
           </Button>
@@ -86,9 +88,25 @@
           </ItemsControl.ItemsPanel>
           <ItemsControl.ItemTemplate>
             <DataTemplate>
-              <StackPanel x:ConnectionId='6' Orientation="Vertical" Margin="5" Width="60" Height="80"
-                                                        >
-                <Image Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Center" />
+              <StackPanel x:ConnectionId='6' x:Name="ShortcutStackPanel" Orientation="Vertical" Margin="5" Width="60" Height="80"
+                                                        
+                                                            
+                                                        
+                                                              >
+                <Grid>
+                  <Image Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" />
+                  <!-- 删除按钮 -->
+                  <Button x:ConnectionId='7' x:Name="DeleteShortcutButton" Content="&#xE74D;" FontFamily="Segoe Fluent Icons"
+                    FontSize="12" Foreground="White" Background="#CCFF0000" HorizontalAlignment="Right"
+                    VerticalAlignment="Top" Width="16" Height="16" Padding="0"
+                    Style="{StaticResource SubZoneNavBarButton}"
+                    Visibility="Collapsed"                                   >
+                    <Button.Resources>
+                      <Style TargetType="Button" BasedOn="{StaticResource SubZoneNavBarButton}" />
+                    </Button.Resources>
+                  </Button>
+                </Grid>
                 <TextBlock Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="Center"
                   Foreground="White" FontSize="10" Margin="0,5,0,0" MaxLines="2" />
               </StackPanel>

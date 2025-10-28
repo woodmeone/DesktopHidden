@@ -226,7 +226,7 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
         
         private void InitTypeTables()
         {
-            _typeNameTable = new string[19];
+            _typeNameTable = new string[20];
             _typeNameTable[0] = "Microsoft.UI.Xaml.Controls.XamlControlsResources";
             _typeNameTable[1] = "Microsoft.UI.Xaml.ResourceDictionary";
             _typeNameTable[2] = "Object";
@@ -238,16 +238,17 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
             _typeNameTable[8] = "Microsoft.UI.Xaml.Controls.UserControl";
             _typeNameTable[9] = "DesktopHidden.Converters.BooleanToGridLengthConverter";
             _typeNameTable[10] = "DesktopHidden.Converters.BooleanToVisibilityConverter";
-            _typeNameTable[11] = "DesktopHidden.Views.SubZoneView";
-            _typeNameTable[12] = "DesktopHidden.Views.SubZoneWindow";
-            _typeNameTable[13] = "DesktopHidden.Models.SubZoneModel";
-            _typeNameTable[14] = "Microsoft.UI.Windowing.AppWindow";
-            _typeNameTable[15] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
-            _typeNameTable[16] = "Microsoft.UI.Xaml.DependencyObject";
-            _typeNameTable[17] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
-            _typeNameTable[18] = "Int32";
+            _typeNameTable[11] = "DesktopHidden.Converters.ColorToBrushConverter";
+            _typeNameTable[12] = "DesktopHidden.Views.SubZoneView";
+            _typeNameTable[13] = "DesktopHidden.Views.SubZoneWindow";
+            _typeNameTable[14] = "DesktopHidden.Models.SubZoneModel";
+            _typeNameTable[15] = "Microsoft.UI.Windowing.AppWindow";
+            _typeNameTable[16] = "Microsoft.UI.Xaml.Controls.TreeViewNode";
+            _typeNameTable[17] = "Microsoft.UI.Xaml.DependencyObject";
+            _typeNameTable[18] = "System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>";
+            _typeNameTable[19] = "Int32";
 
-            _typeTable = new global::System.Type[19];
+            _typeTable = new global::System.Type[20];
             _typeTable[0] = typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources);
             _typeTable[1] = typeof(global::Microsoft.UI.Xaml.ResourceDictionary);
             _typeTable[2] = typeof(global::System.Object);
@@ -259,14 +260,15 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
             _typeTable[8] = typeof(global::Microsoft.UI.Xaml.Controls.UserControl);
             _typeTable[9] = typeof(global::DesktopHidden.Converters.BooleanToGridLengthConverter);
             _typeTable[10] = typeof(global::DesktopHidden.Converters.BooleanToVisibilityConverter);
-            _typeTable[11] = typeof(global::DesktopHidden.Views.SubZoneView);
-            _typeTable[12] = typeof(global::DesktopHidden.Views.SubZoneWindow);
-            _typeTable[13] = typeof(global::DesktopHidden.Models.SubZoneModel);
-            _typeTable[14] = typeof(global::Microsoft.UI.Windowing.AppWindow);
-            _typeTable[15] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
-            _typeTable[16] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
-            _typeTable[17] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
-            _typeTable[18] = typeof(global::System.Int32);
+            _typeTable[11] = typeof(global::DesktopHidden.Converters.ColorToBrushConverter);
+            _typeTable[12] = typeof(global::DesktopHidden.Views.SubZoneView);
+            _typeTable[13] = typeof(global::DesktopHidden.Views.SubZoneWindow);
+            _typeTable[14] = typeof(global::DesktopHidden.Models.SubZoneModel);
+            _typeTable[15] = typeof(global::Microsoft.UI.Windowing.AppWindow);
+            _typeTable[16] = typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode);
+            _typeTable[17] = typeof(global::Microsoft.UI.Xaml.DependencyObject);
+            _typeTable[18] = typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>);
+            _typeTable[19] = typeof(global::System.Int32);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -307,20 +309,22 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
         private object Activate_7_DisguiseEditorView() { return new global::DesktopHidden.Views.DisguiseEditorView(); }
         private object Activate_9_BooleanToGridLengthConverter() { return new global::DesktopHidden.Converters.BooleanToGridLengthConverter(); }
         private object Activate_10_BooleanToVisibilityConverter() { return new global::DesktopHidden.Converters.BooleanToVisibilityConverter(); }
-        private object Activate_13_SubZoneModel() { return new global::DesktopHidden.Models.SubZoneModel(); }
-        private object Activate_15_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
+        private object Activate_11_ColorToBrushConverter() { return new global::DesktopHidden.Converters.ColorToBrushConverter(); }
+        private object Activate_14_SubZoneModel() { return new global::DesktopHidden.Models.SubZoneModel(); }
+        private object Activate_16_TreeViewNode() { return new global::Microsoft.UI.Xaml.Controls.TreeViewNode(); }
         private void StaticInitializer_0_XamlControlsResources() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.XamlControlsResources).TypeHandle);
         private void StaticInitializer_4_BooleanToLockIconConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Converters.BooleanToLockIconConverter).TypeHandle);
         private void StaticInitializer_5_MainWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.MainWindow).TypeHandle);
         private void StaticInitializer_7_DisguiseEditorView() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.DisguiseEditorView).TypeHandle);
         private void StaticInitializer_9_BooleanToGridLengthConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Converters.BooleanToGridLengthConverter).TypeHandle);
         private void StaticInitializer_10_BooleanToVisibilityConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Converters.BooleanToVisibilityConverter).TypeHandle);
-        private void StaticInitializer_11_SubZoneView() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneView).TypeHandle);
-        private void StaticInitializer_12_SubZoneWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneWindow).TypeHandle);
-        private void StaticInitializer_13_SubZoneModel() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Models.SubZoneModel).TypeHandle);
-        private void StaticInitializer_14_AppWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Windowing.AppWindow).TypeHandle);
-        private void StaticInitializer_15_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
-        private void StaticInitializer_17_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
+        private void StaticInitializer_11_ColorToBrushConverter() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Converters.ColorToBrushConverter).TypeHandle);
+        private void StaticInitializer_12_SubZoneView() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneView).TypeHandle);
+        private void StaticInitializer_13_SubZoneWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Views.SubZoneWindow).TypeHandle);
+        private void StaticInitializer_14_SubZoneModel() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::DesktopHidden.Models.SubZoneModel).TypeHandle);
+        private void StaticInitializer_15_AppWindow() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Windowing.AppWindow).TypeHandle);
+        private void StaticInitializer_16_TreeViewNode() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::Microsoft.UI.Xaml.Controls.TreeViewNode).TypeHandle);
+        private void StaticInitializer_18_IList() => global::System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(global::System.Collections.Generic.IList<global::Microsoft.UI.Xaml.Controls.TreeViewNode>).TypeHandle);
         private void MapAdd_0_XamlControlsResources(object instance, object key, object item)
         {
             var collection = (global::System.Collections.Generic.IDictionary<global::System.Object, global::System.Object>)instance;
@@ -328,7 +332,7 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
             var newItem = (global::System.Object)item;
             collection.Add(newKey, newItem);
         }
-        private void VectorAdd_17_IList(object instance, object item)
+        private void VectorAdd_18_IList(object instance, object item)
         {
             var collection = (global::System.Collections.Generic.ICollection<global::Microsoft.UI.Xaml.Controls.TreeViewNode>)instance;
             var newItem = (global::Microsoft.UI.Xaml.Controls.TreeViewNode)item;
@@ -414,43 +418,51 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 11:   //  DesktopHidden.Views.SubZoneView
+            case 11:   //  DesktopHidden.Converters.ColorToBrushConverter
+                userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.Activator = Activate_11_ColorToBrushConverter;
+                userType.StaticInitializer = StaticInitializer_11_ColorToBrushConverter;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 12:   //  DesktopHidden.Views.SubZoneView
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Controls.UserControl"));
-                userType.StaticInitializer = StaticInitializer_11_SubZoneView;
+                userType.StaticInitializer = StaticInitializer_12_SubZoneView;
                 userType.AddMemberName("ParentWindow");
                 userType.AddMemberName("SubZoneModel");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 12:   //  DesktopHidden.Views.SubZoneWindow
+            case 13:   //  DesktopHidden.Views.SubZoneWindow
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.Window"));
-                userType.StaticInitializer = StaticInitializer_12_SubZoneWindow;
+                userType.StaticInitializer = StaticInitializer_13_SubZoneWindow;
                 userType.AddMemberName("SubZoneModel");
                 userType.AddMemberName("AppWindow");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 13:   //  DesktopHidden.Models.SubZoneModel
+            case 14:   //  DesktopHidden.Models.SubZoneModel
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_13_SubZoneModel;
+                userType.StaticInitializer = StaticInitializer_14_SubZoneModel;
                 userType.SetIsReturnTypeStub();
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 14:   //  Microsoft.UI.Windowing.AppWindow
+            case 15:   //  Microsoft.UI.Windowing.AppWindow
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
-                userType.StaticInitializer = StaticInitializer_14_AppWindow;
+                userType.StaticInitializer = StaticInitializer_15_AppWindow;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 15:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
+            case 16:   //  Microsoft.UI.Xaml.Controls.TreeViewNode
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Microsoft.UI.Xaml.DependencyObject"));
-                userType.Activator = Activate_15_TreeViewNode;
-                userType.StaticInitializer = StaticInitializer_15_TreeViewNode;
+                userType.Activator = Activate_16_TreeViewNode;
+                userType.StaticInitializer = StaticInitializer_16_TreeViewNode;
                 userType.AddMemberName("Children");
                 userType.AddMemberName("Content");
                 userType.AddMemberName("Depth");
@@ -462,19 +474,19 @@ namespace DesktopHidden.DesktopHidden_XamlTypeInfo
                 xamlType = userType;
                 break;
 
-            case 16:   //  Microsoft.UI.Xaml.DependencyObject
+            case 17:   //  Microsoft.UI.Xaml.DependencyObject
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 17:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
+            case 18:   //  System.Collections.Generic.IList`1<Microsoft.UI.Xaml.Controls.TreeViewNode>
                 userType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlUserType(this, typeName, type, null);
-                userType.StaticInitializer = StaticInitializer_17_IList;
-                userType.CollectionAdd = VectorAdd_17_IList;
+                userType.StaticInitializer = StaticInitializer_18_IList;
+                userType.CollectionAdd = VectorAdd_18_IList;
                 userType.SetIsReturnTypeStub();
                 xamlType = userType;
                 break;
 
-            case 18:   //  Int32
+            case 19:   //  Int32
                 xamlType = new global::DesktopHidden.DesktopHidden_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
             }
