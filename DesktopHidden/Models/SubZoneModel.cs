@@ -20,6 +20,8 @@ namespace DesktopHidden.Models
         public Guid Id { get; set; } = Guid.NewGuid();
         public Point Position { get; set; }
         public Size Size { get; set; }
+        // 子区原始大小，用于在调整大小时作为参考。
+        public Size OriginalSize { get; set; }
         // 子区背景颜色，默认是45%透明度的黑色。例如：Color.FromArgb(115, 0, 0, 0) 表示透明度为115（约45%），RGB为0,0,0（黑色）。
         public Color BackgroundColor { get; set; } = Color.FromArgb(115, 0, 0, 0);
         // 子区整体不透明度，默认为1.0（完全不透明）。由于背景颜色已包含透明度，这里设置为1.0以避免双重透明。

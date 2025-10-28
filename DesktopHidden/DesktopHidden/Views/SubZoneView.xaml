@@ -38,7 +38,7 @@
       </Grid.RowDefinitions>
 
       <!-- 顶部导航栏 -->
-      <Grid x:Name="NavBar" Grid.Row="0" Background="#99FFFFFF" HorizontalAlignment="Stretch"
+      <Grid x:Name="NavBar" Grid.Row="0" Background="#99000000" HorizontalAlignment="Stretch"
         VerticalAlignment="Top"
         PointerPressed="NavBar_PointerPressed">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

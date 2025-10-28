@@ -33,6 +33,7 @@ namespace DesktopHidden.SystemIntegration
         // Window Styles
         internal const uint WS_CAPTION = 0x00C00000; // 标题栏和边框
         internal const uint WS_THICKFRAME = 0x00040000; // 可调整大小的边框
+        internal const uint WS_MINIMIZEBOX = 0x00020000; // 最小化按钮
 
         // Extended Window Styles
         internal const uint WS_EX_TOOLWINDOW = 0x00000080; // 不在任务栏显示
@@ -67,6 +68,15 @@ namespace DesktopHidden.SystemIntegration
         internal const uint LWA_ALPHA = 0x00000002; // 使用bAlpha来设置窗口的透明度
         internal const uint LWA_COLORKEY = 0x00000001; // 使用crKey来设置透明色键
 
+        // SetParent parameters
+        internal const int GWL_HWNDPARENT = -8; // 设置窗口的父窗口句柄
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern IntPtr GetDesktopWindow(); // 获取桌面窗口句柄
+
         // Dwm API
         [DllImport("dwmapi.dll")]
         internal static extern int DwmExtendFrameIntoClientArea(IntPtr hWnd, ref MARGINS pMarInset);
@@ -95,8 +105,9 @@ namespace DesktopHidden.SystemIntegration
             // 设置窗口的整体透明度为 45% (115/255)
             SetLayeredWindowAttributes(hWnd, 0, 115, LWA_ALPHA); // 设置 Alpha 值
 
-            // Make the window topmost
-            SetWindowPos(hWnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+            // 将窗口的父窗口设置为桌面窗口，使其始终显示在桌面上，而不是浮动在其他应用程序之上
+            IntPtr hWndDesktop = GetDesktopWindow();
+            SetParent(hWnd, hWndDesktop);
         }
 
         public static void SetWindowTopmost(IntPtr hWnd)

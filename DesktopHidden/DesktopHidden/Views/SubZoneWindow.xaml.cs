@@ -10,11 +10,32 @@ using Windows.Graphics;
 using WinRT.Interop;
 using System.Runtime.InteropServices; // Added for DllImport
 using Windows.UI.Core; // Add this for CoreCursorType
+using System.Diagnostics; // 用于Debug.WriteLine
 
 namespace DesktopHidden.Views
 {
     public sealed partial class SubZoneWindow : Window
     {
+        // Win32 常量
+        private const int GWLP_WNDPROC = -4; // 设置新的窗口过程
+        private const int WM_SYSCOMMAND = 0x0112; // 系统命令消息
+        private const int SC_MINIMIZE = 0xF020; // 最小化命令
+
+        // 用于存储原始窗口过程的委托和句柄
+        private delegate IntPtr WndProcDelegate(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+        private static WndProcDelegate newWndProc = null;
+        private IntPtr oldWndProc = IntPtr.Zero;
+
+        // DllImport 声明
+        [DllImport("user32.dll")]
+        private static extern IntPtr SetWindowLongPtr(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr CallWindowProc(IntPtr lpPrevWndProc, IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
         public event EventHandler<Guid> RequestClose; // 添加 RequestClose 事件
         public SubZoneModel SubZoneModel { get; set; }
         public new AppWindow AppWindow => _appWindow; // 提供公共访问器
@@ -37,6 +58,11 @@ namespace DesktopHidden.Views
             // 获取窗口句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
 
+            // 移除最小化框样式
+            uint style = (uint)Win32WindowUtility.GetWindowLong(hWnd, Win32WindowUtility.GWL_STYLE);
+            style &= ~Win32WindowUtility.WS_MINIMIZEBOX;
+            Win32WindowUtility.SetWindowLong(hWnd, Win32WindowUtility.GWL_STYLE, (int)style);
+
             // 设置窗口的初始位置和大小
             _appWindow = GetAppWindowForCurrentWindow();
             if (_appWindow != null)
@@ -50,7 +76,7 @@ namespace DesktopHidden.Views
 
             // 应用系统集成特性
             Win32WindowUtility.SetWindowTransparent(hWnd); // 设置透明、鼠标穿透、不在任务栏
-            Win32WindowUtility.SetWindowTopmost(hWnd);    // 设置置顶
+            // Win32WindowUtility.SetWindowTopmost(hWnd);    // 设置置顶，此行已移除，避免窗口浮动在其他应用之上
 
             // 为了避免标题栏显示，可以设置ExtendsContentIntoTitleBar = true
             this.ExtendsContentIntoTitleBar = true;
@@ -61,6 +87,36 @@ namespace DesktopHidden.Views
 
             // 监听AppWindow的Changed事件来更新SubZoneModel的位置和大小
             _appWindow.Changed += AppWindow_Changed;
+
+            // 替换窗口过程以拦截消息
+            newWndProc = new WndProcDelegate(NewWindowProc);
+            oldWndProc = SetWindowLongPtr(hWnd, GWLP_WNDPROC, Marshal.GetFunctionPointerForDelegate(newWndProc));
+
+            // 订阅Closed事件，以便在窗口关闭时恢复原始窗口过程
+            this.Closed += SubZoneWindow_Closed;
+        }
+
+        private void SubZoneWindow_Closed(object sender, WindowEventArgs args)
+        {
+            // 恢复原始窗口过程
+            IntPtr hWnd = WindowNative.GetWindowHandle(this);
+            SetWindowLongPtr(hWnd, GWLP_WNDPROC, oldWndProc);
+            newWndProc = null; // 释放对委托的引用
+        }
+
+        private IntPtr NewWindowProc(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam)
+        {
+            if (msg == WM_SYSCOMMAND)
+            {
+                // 阻止最小化命令
+                if (wParam.ToInt32() == SC_MINIMIZE)
+                {
+                    Debug.WriteLine("阻止最小化！"); // 调试输出
+                    return IntPtr.Zero; // 阻止消息进一步处理
+                }
+            }
+            // 调用原始窗口过程
+            return CallWindowProc(oldWndProc, hWnd, msg, wParam, lParam);
         }
 
         // 用于触发 RequestClose 事件的方法
