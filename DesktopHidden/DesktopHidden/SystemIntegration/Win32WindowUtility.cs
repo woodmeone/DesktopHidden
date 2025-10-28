@@ -2,6 +2,7 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
+using System.IO; // Added for File.GetAttributes
 
 namespace DesktopHidden.SystemIntegration
 {
@@ -151,6 +152,43 @@ namespace DesktopHidden.SystemIntegration
             System.Text.StringBuilder wallpaperPath = new System.Text.StringBuilder((int)MAX_PATH);
             SystemParametersInfo(SPI_GETDESKWALLPAPER, MAX_PATH, wallpaperPath, 0);
             return wallpaperPath.ToString();
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool SetFileAttributes(string lpFileName, FileAttributes dwFileAttributes);
+
+        [Flags]
+        public enum FileAttributes : uint
+        {
+            FILE_ATTRIBUTE_READONLY = 0x00000001,
+            FILE_ATTRIBUTE_HIDDEN = 0x00000002,
+            FILE_ATTRIBUTE_SYSTEM = 0x00000004,
+            FILE_ATTRIBUTE_DIRECTORY = 0x00000010,
+            FILE_ATTRIBUTE_ARCHIVE = 0x00000020,
+            FILE_ATTRIBUTE_DEVICE = 0x00000040,
+            FILE_ATTRIBUTE_NORMAL = 0x00000080,
+            FILE_ATTRIBUTE_TEMPORARY = 0x00000100,
+            FILE_ATTRIBUTE_SPARSE_FILE = 0x00000200,
+            FILE_ATTRIBUTE_REPARSE_POINT = 0x00000400,
+            FILE_ATTRIBUTE_COMPRESSED = 0x00000800,
+            FILE_ATTRIBUTE_OFFLINE = 0x00001000,
+            FILE_ATTRIBUTE_NOT_CONTENT_INDEXED = 0x00002000,
+            FILE_ATTRIBUTE_ENCRYPTED = 0x00004000,
+            FILE_ATTRIBUTE_VIRTUAL = 0x00010000
+        }
+
+        public static void HideFile(string filePath)
+        {
+            SetFileAttributes(filePath, FileAttributes.FILE_ATTRIBUTE_HIDDEN);
+        }
+
+        public static void ShowFile(string filePath)
+        {
+            // 获取当前文件属性
+            FileAttributes attributes = (FileAttributes)File.GetAttributes(filePath);
+            // 移除隐藏属性
+            attributes &= ~FileAttributes.FILE_ATTRIBUTE_HIDDEN;
+            SetFileAttributes(filePath, attributes);
         }
     }
 }

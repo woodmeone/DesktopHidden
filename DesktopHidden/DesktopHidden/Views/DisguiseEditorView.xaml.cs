@@ -23,7 +23,10 @@ namespace DesktopHidden.Views
                     // 使用 BitmapImage 加载图片
                     BitmapImage bitmapImage = new BitmapImage(new Uri(wallpaperPath));
                     // 将图片设置为 Grid 的背景
-                    (Content as Grid).Background = new Microsoft.UI.Xaml.Media.ImageBrush { ImageSource = bitmapImage };
+                    if (Content is Grid contentGrid)
+                    {
+                        contentGrid.Background = new Microsoft.UI.Xaml.Media.ImageBrush { ImageSource = bitmapImage };
+                    }
                 }
                 catch (Exception ex)
                 {

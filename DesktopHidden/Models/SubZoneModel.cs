@@ -4,6 +4,7 @@ using Windows.Foundation;
 using Windows.UI;
 using System.ComponentModel; // 添加这个命名空间
 using System.Runtime.CompilerServices; // 添加这个命名空间
+using System.Collections.ObjectModel; // 添加这个命名空间
 
 namespace DesktopHidden.Models
 {
@@ -57,7 +58,7 @@ namespace DesktopHidden.Models
             }
         }
 
-        public List<AppShortcutModel> Shortcuts { get; set; } = new List<AppShortcutModel>();
+        public ObservableCollection<ShortcutModel> Shortcuts { get; set; } = new ObservableCollection<ShortcutModel>();
 
         public SubZoneModel()
         {
@@ -71,13 +72,5 @@ namespace DesktopHidden.Models
             Size = size;
             _isContentVisible = true; // 确保默认值被设置并通过属性通知
         }
-    }
-
-    // AppShortcutModel 会在后续步骤中定义
-    public class AppShortcutModel
-    {
-        public required string Path { get; set; }
-        public required string IconPath { get; set; }
-        public required string Name { get; set; }
     }
 }

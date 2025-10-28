@@ -36,11 +36,11 @@ namespace DesktopHidden.Views
         [DllImport("user32.dll")]
         private static extern IntPtr CallWindowProc(IntPtr lpPrevWndProc, IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
-        public event EventHandler<Guid> RequestClose; // 添加 RequestClose 事件
-        public SubZoneModel SubZoneModel { get; set; }
+        public event EventHandler<Guid>? RequestClose; // 添加 RequestClose 事件，声明为可空
+        public SubZoneModel? SubZoneModel { get; set; } // 声明为可空
         public new AppWindow AppWindow => _appWindow; // 提供公共访问器
         private AppWindow _appWindow;
-        private SubZoneView SubZoneUserControl; // 声明 SubZoneView 字段
+        private SubZoneView? SubZoneUserControl; // 声明 SubZoneView 字段，声明为可空
 
         public SubZoneWindow(SubZoneModel subZoneModel)
         {
@@ -53,7 +53,10 @@ namespace DesktopHidden.Views
             SubZoneUserControl.DataContext = SubZoneModel;
             this.Content = SubZoneUserControl; // 设置窗口内容为 SubZoneView
             SubZoneUserControl.PointerPressed += SubZoneUserControl_PointerPressed; // 订阅 PointerPressed 事件
-            SubZoneModel.PropertyChanged += SubZoneModel_PropertyChanged; // 订阅 SubZoneModel 的 PropertyChanged 事件
+            if (SubZoneModel != null)
+            {
+                SubZoneModel.PropertyChanged += SubZoneModel_PropertyChanged; // 订阅 SubZoneModel 的 PropertyChanged 事件
+            }
 
             // 获取窗口句柄
             IntPtr hWnd = WindowNative.GetWindowHandle(this);
@@ -68,7 +71,10 @@ namespace DesktopHidden.Views
             if (_appWindow != null)
             {
                 _appWindow.MoveAndResize(new RectInt32((int)SubZoneModel.Position.X, (int)SubZoneModel.Position.Y, (int)SubZoneModel.Size.Width, (int)SubZoneModel.Size.Height));
-                (_appWindow.Presenter as OverlappedPresenter).IsResizable = true; // 允许调整大小
+                if (_appWindow.Presenter is OverlappedPresenter overlappedPresenter)
+                {
+                    overlappedPresenter.IsResizable = true; // 允许调整大小
+                }
                 // _appWindow.IsShownInSwitchers = false; // 不在Alt+Tab中显示，如果需要
                 _appWindow.TitleBar.BackgroundColor = Colors.Transparent; // 设置标题栏背景为透明
                 _appWindow.TitleBar.ButtonBackgroundColor = Colors.Transparent; // 设置标题栏按钮背景为透明
@@ -120,7 +126,13 @@ namespace DesktopHidden.Views
         }
 
         // 用于触发 RequestClose 事件的方法
-        public void OnRequestClose() => RequestClose?.Invoke(this, SubZoneModel.Id);
+        public void OnRequestClose()
+        {
+            if (SubZoneModel != null)
+            {
+                RequestClose?.Invoke(this, SubZoneModel.Id);
+            }
+        }
 
         // 设置窗口是否可调整大小的方法
         public void SetResizable(bool canResize)
@@ -135,11 +147,14 @@ namespace DesktopHidden.Views
         {
             if (args.DidPositionChange || args.DidSizeChange)
             {
-                SubZoneModel.Position = new Windows.Foundation.Point(sender.Position.X, sender.Position.Y);
-                SubZoneModel.Size = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height); // 更新当前尺寸
-                if (args.DidSizeChange && SubZoneModel.IsContentVisible) // 如果大小改变且内容可见，才更新 OriginalSize
+                if (SubZoneModel != null)
                 {
-                    SubZoneModel.OriginalSize = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height);
+                    SubZoneModel.Position = new Windows.Foundation.Point(sender.Position.X, sender.Position.Y);
+                    SubZoneModel.Size = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height); // 更新当前尺寸
+                    if (args.DidSizeChange && SubZoneModel.IsContentVisible) // 如果大小改变且内容可见，才更新 OriginalSize
+                    {
+                        SubZoneModel.OriginalSize = new Windows.Foundation.Size(sender.Size.Width, sender.Size.Height);
+                    }
                 }
             }
         }
@@ -229,7 +244,8 @@ namespace DesktopHidden.Views
                 AppWindow appWindow = this.AppWindow; // 获取AppWindow
                 IntPtr hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this); // 获取窗口句柄
 
-                Windows.Foundation.Point mousePosition = e.GetCurrentPoint(sender as UIElement).Position; // 鼠标相对于SubZoneView的坐标
+                UIElement? uiElementSender = sender as UIElement; // 声明为可空
+                Windows.Foundation.Point mousePosition = e.GetCurrentPoint(uiElementSender).Position; // 鼠标相对于SubZoneView的坐标
                 ResizeDirection direction = GetResizeDirection(mousePosition);
 
                 if (direction != ResizeDirection.None)
@@ -262,13 +278,13 @@ namespace DesktopHidden.Views
         [DllImport("user32.dll")]
         private static extern IntPtr SetCursor(IntPtr hCursor);
 
-        public static void SetCursor(InputCursor cursor)
+        public static void SetCursor(InputCursor? cursor) // 声明为可空
         {
             if (cursor != null && cursor.GetType().Name == "CoreCursorInputCursor")
             {
                 // Get CoreCursor's underlying HCURSOR value
                 // This is a bit hacky, as CoreCursor is internal, but for now this works.
-                var coreCursor = (CoreCursor)cursor.GetType().GetProperty("CoreCursor").GetValue(cursor);
+                var coreCursor = (CoreCursor)cursor.GetType().GetProperty("CoreCursor")!.GetValue(cursor)!; // 使用 ! 避免警告
                 SetCursor(coreCursor.Type.ToHcursor());
             }
             else

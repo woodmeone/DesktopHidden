@@ -29,21 +29,21 @@
     <AppXManifest Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2025-10-28T08:25:46.759</Modified>
+      <Modified>2025-10-28T08:50:21.316</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\DesktopHidden.runtimeconfig.json">
       <PackagePath>DesktopHidden.runtimeconfig.json</PackagePath>
-      <Modified>2025-10-28T08:25:46.429</Modified>
+      <Modified>2025-10-28T08:50:21.007</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\apphost.exe">
       <PackagePath>DesktopHidden.exe</PackagePath>
-      <Modified>2025-10-28T08:25:45.897</Modified>
+      <Modified>2025-10-28T08:50:21.910</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\DesktopHidden.dll">
       <PackagePath>DesktopHidden.dll</PackagePath>
-      <Modified>2025-10-28T08:25:46.269</Modified>
+      <Modified>2025-10-28T08:50:20.790</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.20\runtimes\win-x64\lib\net8.0\Microsoft.CSharp.dll">
       <PackagePath>Microsoft.CSharp.dll</PackagePath>
@@ -589,14 +589,6 @@
       <PackagePath>System.Text.Encoding.dll</PackagePath>
       <Modified>2025-08-19T22:25:46.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.20\runtimes\win-x64\lib\net8.0\System.Text.Encodings.Web.dll">
-      <PackagePath>System.Text.Encodings.Web.dll</PackagePath>
-      <Modified>2025-08-19T22:35:40.000</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.20\runtimes\win-x64\lib\net8.0\System.Text.Json.dll">
-      <PackagePath>System.Text.Json.dll</PackagePath>
-      <Modified>2025-08-19T22:35:44.000</Modified>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.netcore.app.runtime.win-x64\8.0.20\runtimes\win-x64\lib\net8.0\System.Text.RegularExpressions.dll">
       <PackagePath>System.Text.RegularExpressions.dll</PackagePath>
       <Modified>2025-08-19T22:35:48.000</Modified>
@@ -781,6 +773,10 @@
       <PackagePath>WinRT.Runtime.dll</PackagePath>
       <Modified>2024-11-11T17:23:04.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\communitytoolkit.mvvm\8.4.0\lib\net8.0-windows10.0.17763\CommunityToolkit.Mvvm.dll">
+      <PackagePath>CommunityToolkit.Mvvm.dll</PackagePath>
+      <Modified>2024-12-12T07:54:40.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.windowsappsdk.ai\1.8.38\lib\net6.0-windows10.0.17763.0\Microsoft.Graphics.Imaging.Projection.dll">
       <PackagePath>Microsoft.Graphics.Imaging.Projection.dll</PackagePath>
       <Modified>2025-09-15T20:44:42.000</Modified>
@@ -897,6 +893,18 @@
       <PackagePath>Microsoft.WinUI.dll</PackagePath>
       <Modified>2025-09-07T02:47:34.000</Modified>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\system.io.pipelines\9.0.10\lib\net8.0\System.IO.Pipelines.dll">
+      <PackagePath>System.IO.Pipelines.dll</PackagePath>
+      <Modified>2025-09-25T19:30:48.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\system.text.encodings.web\9.0.10\lib\net8.0\System.Text.Encodings.Web.dll">
+      <PackagePath>System.Text.Encodings.Web.dll</PackagePath>
+      <Modified>2025-09-25T19:30:38.000</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\system.text.json\9.0.10\lib\net8.0\System.Text.Json.dll">
+      <PackagePath>System.Text.Json.dll</PackagePath>
+      <Modified>2025-09-25T19:31:26.000</Modified>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\WoodMe\.nuget\packages\microsoft.web.webview2\1.0.3179.45\runtimes\win-x64\native\WebView2Loader.dll">
       <PackagePath>WebView2Loader.dll</PackagePath>
       <Modified>2025-03-30T09:04:32.000</Modified>
@@ -927,7 +935,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\DesktopHidden.deps.json">
       <PackagePath>DesktopHidden.deps.json</PackagePath>
-      <Modified>2025-10-28T08:25:46.427</Modified>
+      <Modified>2025-10-28T08:50:21.004</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
@@ -963,7 +971,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2025-10-28T08:25:46.469</Modified>
+      <Modified>2025-10-28T08:50:21.094</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

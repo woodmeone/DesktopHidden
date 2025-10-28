@@ -281,3 +281,5 @@ D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-window
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\MultipleQualifiersPerDimensionFound.txt
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\ProjectArchitectures.txt
 D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\obj\x64\Debug\net8.0-windows10.0.19041.0\win-x64\.winmd_cache\$Microsoft.Web.WebView2.Core.winmd_638789222360000000.json
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\CommunityToolkit.Mvvm.dll
+D:\Project\DesktopHidden\DesktopHidden\DesktopHidden\bin\x64\Debug\net8.0-windows10.0.19041.0\win-x64\System.IO.Pipelines.dll

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qn7ByWxFrIk=",
+  "dgSpecHash": "DaASqNHUpR8=",
   "success": true,
   "projectFilePath": "D:\\Project\\DesktopHidden\\DesktopHidden\\DesktopHidden\\DesktopHidden.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\WoodMe\\.nuget\\packages\\communitytoolkit.mvvm\\8.4.0\\communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.web.webview2\\1.0.3179.45\\microsoft.web.webview2.1.0.3179.45.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windows.cswinrt\\2.0.7\\microsoft.windows.cswinrt.2.0.7.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windows.sdk.buildtools\\10.0.26100.6901\\microsoft.windows.sdk.buildtools.10.0.26100.6901.nupkg.sha512",
@@ -18,6 +19,9 @@
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windowsappsdk.runtime\\1.8.251003001\\microsoft.windowsappsdk.runtime.1.8.251003001.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windowsappsdk.widgets\\1.8.250904007\\microsoft.windowsappsdk.widgets.1.8.250904007.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windowsappsdk.winui\\1.8.250906003\\microsoft.windowsappsdk.winui.1.8.250906003.nupkg.sha512",
+    "C:\\Users\\WoodMe\\.nuget\\packages\\system.io.pipelines\\9.0.10\\system.io.pipelines.9.0.10.nupkg.sha512",
+    "C:\\Users\\WoodMe\\.nuget\\packages\\system.text.encodings.web\\9.0.10\\system.text.encodings.web.9.0.10.nupkg.sha512",
+    "C:\\Users\\WoodMe\\.nuget\\packages\\system.text.json\\9.0.10\\system.text.json.9.0.10.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\8.0.20\\microsoft.netcore.app.runtime.win-x86.8.0.20.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512",
     "C:\\Users\\WoodMe\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\8.0.20\\microsoft.aspnetcore.app.runtime.win-x86.8.0.20.nupkg.sha512",

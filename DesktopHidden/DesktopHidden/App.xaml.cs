@@ -17,6 +17,8 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage; // 添加这个命名空间
 using static Microsoft.UI.Colors; // 修改为 using static，因为 Colors 是一个静态类
+using DesktopHidden.SystemIntegration; // 添加此行
+using System.Collections.ObjectModel; // 添加此行
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -30,7 +32,10 @@ namespace DesktopHidden
     {
         private Window? _window;
 
-        public static new List<Window> Windows { get; } = new List<Window>();
+        public static List<Window> Windows { get; } = new List<Window>();
+
+        // 存储所有被隐藏的原始快捷方式路径
+        public static ObservableCollection<string> HiddenShortcutOriginalPaths { get; } = new ObservableCollection<string>();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -66,6 +71,9 @@ namespace DesktopHidden
 
             // 如果需要，可以在此处终止应用程序
             // Application.Current.Exit();
+
+            // 在应用程序崩溃时尝试恢复隐藏的快捷方式
+            RestoreHiddenShortcuts();
         }
 
         /// <summary>
@@ -91,6 +99,22 @@ namespace DesktopHidden
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// 恢复所有被隐藏的快捷方式。
+        /// </summary>
+        public static void RestoreHiddenShortcuts()
+        {
+            foreach (var path in HiddenShortcutOriginalPaths)
+            {
+                if (File.Exists(path))
+                {
+                    Win32WindowUtility.ShowFile(path);
+                    System.Diagnostics.Debug.WriteLine($"Restored hidden shortcut: {path}");
+                }
+            }
+            HiddenShortcutOriginalPaths.Clear(); // 清空列表
         }
     }
 }

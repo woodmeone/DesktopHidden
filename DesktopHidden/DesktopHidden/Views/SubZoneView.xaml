@@ -71,9 +71,30 @@
 
       <!-- 内容区域 -->
       <Grid x:Name="ContentArea" Grid.Row="1" Background="Transparent"
-        Visibility="{Binding IsContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center"
-          Foreground="White" FontSize="20" />
+        Visibility="{Binding IsContentVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+        AllowDrop="True" DragOver="ContentArea_DragOver" Drop="ContentArea_Drop">
+        <ItemsControl x:Name="ShortcutItemsControl"
+          ItemsSource="{Binding Shortcuts}"
+          HorizontalAlignment="Left" VerticalAlignment="Top"
+          Margin="5"
+          ScrollViewer.VerticalScrollMode="Auto"
+          ScrollViewer.HorizontalScrollMode="Disabled">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapGrid Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Orientation="Vertical" Margin="5" Width="60" Height="80"
+                DoubleTapped="ShortcutItem_DoubleTapped">
+                <Image Source="{Binding Icon}" Width="32" Height="32" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding Name}" TextWrapping="Wrap" TextAlignment="Center"
+                  Foreground="White" FontSize="10" Margin="0,5,0,0" MaxLines="2" />
+              </StackPanel>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
       </Grid>
     </Grid>
   </Border>
